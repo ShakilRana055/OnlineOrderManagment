@@ -1,0 +1,220 @@
+﻿
+.btn {
+    color: #fff !important;
+}
+
+.swal2-actions .btn {
+    margin: 2px 10px;
+}
+
+.br-pagetitle .icon {
+    font-size: 40px;
+}
+
+.dataTable .btn-group .btn {
+    line-height: 12px;
+    padding: 3px 12px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 5px 10px !important;
+}
+
+.br-section-wrapper {
+    padding: 15px;
+}
+
+.form-control, .dataTables_filter input {
+    height: 35px;
+    padding: 7px 10px;
+}
+
+.input-group-text,
+.input-group > .input-group-append > .btn, .sp-container .input-group > .input-group-append > button, .input-group > .input-group-append > .input-group-text, .input-group > .input-group-prepend:not(:first-child) > .btn, .sp-container .input-group > .input-group-prepend:not(:first-child) > button, .input-group > .input-group-prepend:not(:first-child) > .input-group-text, .input-group > .input-group-prepend:first-child > .btn:not(:first-child), .sp-container .input-group > .input-group-prepend:first-child > button:not(:first-child), .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+    padding: 6px 10px;
+    line-height: 12px;
+}
+
+.dataTables_length {
+    padding-top: 13px;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
+
+span.k-widget.k-datepicker.fc-datepicker {
+    width: 100%;
+    display: block;
+    height: 35px;
+}
+
+span.k-picker-wrap.k-state-default, span.k-picker-wrap.k-state-default .k-input {
+    height: 35px;
+}
+
+.k-widget .parsley-errors-list {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 32px;
+}
+
+::placeholder {
+    color: #f0eded !important;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #f0eded !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #f0eded !important;
+}
+
+table.dataTable thead th {
+    /* background: #F16724 !important;*/
+    background: #555555 !important;
+    color: #fff !important;
+}
+
+.br-pagebody {
+    padding: 0;
+    border: 1px solid #ffcb24 !important;
+    margin: 5px 30px;
+}
+
+.br-pagetitle > div {
+    padding-left: 0px;
+    margin-top: 0;
+}
+
+.file-remover {
+    float: left;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    padding: 3px;
+}
+
+span.file-remove-icon {
+    background: red;
+    padding: 2px 4px;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 3px;
+}
+
+form label {
+    color: #000;
+}
+
+sup {
+    color: red;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.w-ctrl .form-control {
+    width: 75%;
+}
+
+.cur-pointer {
+    cursor: pointer;
+}
+
+.k-widget.k-upload .k-action-buttons {
+    display: none;
+}
+
+.tab-row {
+    display: block;
+    margin: 5px 30px -5px;
+}
+
+    .tab-row li.nav-item {
+        background: #fff;
+        color: #000;
+        border-radius: 3px 3px 0px 0px;
+    }
+
+        .tab-row li.nav-item active {
+            background: red;
+        }
+
+        .tab-row li.nav-item a.active {
+            background: #17a2b8;
+            color: #fff;
+        }
+
+.file-list-table {
+    width: 100% !important;
+}
+
+ul.file-error-list {
+    list-style: none;
+}
+
+ul.file-error-list {
+    list-style: none;
+    font-size: 14px;
+    padding: 0;
+}
+
+    ul.file-error-list li::before {
+        position: relative;
+        /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+        content: "";
+        display: inline-block;
+        /* By using an em scale, the arrows will size with the font */
+        width: 0.4em;
+        height: 0.4em;
+        border-right: 0.2em solid black;
+        border-top: 0.2em solid black;
+        transform: rotate(45deg);
+        margin-right: 0.5em;
+        border-color: red;
+    }
+
+.flow-btn{
+    padding: 1px 5px !important;
+}
+
+.bl-border {
+    border: 3px solid #ffcb24;
+}
+
+.k-widget input[readonly] {
+    background-color: #e9ecef;
+}
+.line-item-table{
+    overflow: scroll;
+}
+
+img.upload-loader {
+    max-height: 50px !important;
+    display: block;
+    position: relative;
+    top: 27%;
+    left: 40%;
+    transform: translate(50%, 100%);
+}
+
+.logout-logo-width {
+    max-height: 18px !important;
+}
+
+.header-logo-width {
+    max-height: 50px !important;
+    padding-right: 15px !important;
+}
+.br-header::before {
+    background-color: #f1e594;
+}
+
+
+
