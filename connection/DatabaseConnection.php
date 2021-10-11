@@ -1,5 +1,5 @@
 <?php
-	$dbname = "book";
+	$dbname = "onlineordersystem";
 	$hostname = "localhost";
 	$username = "root";
 	$password = "";

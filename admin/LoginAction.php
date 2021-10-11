@@ -6,14 +6,13 @@ $msg = "";
 
 if(isset($_POST['submit'])){  
 
-	// creating super admin as default
 	CreatingUser($con);
 
 	$user = trim($_POST['Email']);
 	$pass = trim($_POST['Password']);
 	$md5Password = md5($pass);
 
-	$sql = "SELECT * FROM `users` WHERE `Email` = '$user' AND `Password` = '$md5Password' AND `UserType` != 'Customer'";
+	$sql = "SELECT * FROM `user` WHERE `Email` = '$user' AND `Password` = '$md5Password' AND `RoleName` != 'Customer'";
 
 	$result = mysqli_query($con, $sql);
 	$data = mysqli_fetch_assoc($result);
@@ -31,14 +30,14 @@ if(isset($_POST['submit'])){
 
 function CreatingUser($con){
 	$superAdminPassword =  md5("Ab@123");
-	$sql = "SELECT * FROM `users` WHERE `Email` = 'superadmin@gmail.com' AND `Password` = '$superAdminPassword'";
+	$sql = "SELECT * FROM `user` WHERE `Email` = 'superadmin@gmail.com' AND `Password` = '$superAdminPassword'";
 	$result = mysqli_query($con, $sql);
 	if(mysqli_num_rows($result) == 0){
 		$superAdminPassword =  md5("Ab@123");
 		$currentDate = date('Y-m-d H:s:i');
 
-		$sql = "INSERT INTO `users`(`Name`, `Email`, `Password`, `PhotoUrl`, `UserType`, `CreatedDate`) 
-				VALUES ('Super Admin', 'superadmin@gmail.com', '$superAdminPassword', '../public/layout/images/superadmin.jpg', 'SuperAdmin', '$currentDate')";
+		$sql = "INSERT INTO `user`(`Name`, `Email`, `Password`, `PhotoUrl`, `RoleName`) 
+				VALUES ('Super Admin', 'superadmin@gmail.com', '$superAdminPassword', '../public/layout/images/superadmin.jpg', 'SuperAdmin')";
 		$result = mysqli_query($con, $sql);
 	}
 }

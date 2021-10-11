@@ -28,21 +28,21 @@
             <div class="agileits-top">
                 <h1 style="color:black !important;">Online Order System</h1>
                 <h4 style="margin-bottom:10px;color: black !important; display: flex; justify-content: center;">Sign In</h4>
-                <form class="form-horizontal" enctype="multipart/form-data" data-parsley-validate>
+                <form class="form-horizontal" method = "post" action ="" enctype="multipart/form-data" data-parsley-validate>
                    
-                    <div class="tx-center text-danger mg-b-10"></div>
+                    <div class="tx-center text-danger mg-b-10"><?php echo $msg;?></div>
                     
 
                     <div class="form-group">
                         <label class='control-label'>Email</label>
-                        <input type = "email" class="form-control" placeholder= "Email here .."/>
+                        <input type = "email" name="Email" class="form-control" placeholder= "Email here .."/>
                     </div>
 
                     <div class="form-group">
                         <label class='control-label'>Password</label>
-                        <input type = "password" class="form-control" placeholder= "Password Here .."/>
+                        <input type = "password" name="Password" class="form-control" placeholder= "Password Here .."/>
                     </div>
-                    <button type="submit" style="background: #555555; color:white; font-size: 15px; font-weight: bolder; " class="btn btn-block">Sign In</button>
+                    <button type="submit" name = "submit" style="background: #555555; color:white; font-size: 15px; font-weight: bolder; " class="btn btn-block">Sign In</button>
                 </form>
 
             </div>
