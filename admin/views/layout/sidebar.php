@@ -4,7 +4,7 @@
         
         <ul style="margin-top:20px;" class="br-sideleft-menu">
             <li class="br-menu-item">
-                <a href="#" class="br-menu-link">
+                <a href="index.php" class="br-menu-link">
                     <i class="menu-item-icon icon ion-ios-home-outline tx-24"></i>
                     <span class="menu-item-label">Dashboard</span>
                 </a> 
@@ -15,7 +15,7 @@
                     <span class="menu-item-label">Food Management</span>
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">
-                    <li class="sub-item dummy_sub_company_company subcompany"  ><a href="#" class="sub-link">Food Category</a></li>
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="Category.php" class="sub-link">Food Category</a></li>
                 </ul> 
 
             </li>

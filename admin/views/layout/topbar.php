@@ -1,11 +1,20 @@
-<?php session_start();?>
+<?php 
+    session_start();
+    include("../../connection/DatabaseConnection.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Order System</title>
-
+    <title> <?php echo $headerName;?> - Online Order System</title>
+    <style>
+        .dt-button {
+            background-color: #ffcb24 !important;
+            color: black !important;
+            border: none !important;
+        }
+    </style>
     <!-- vendor css -->
     <link href="../public/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.1.330/styles/kendo.default-v2.min.css" />
