@@ -1,10 +1,10 @@
 (function(){
     let selector = {
-        categoryList : $("#categoryList"),
-        categoryMessage :$("#categoryMessage"),
+        subCategoryList : $("#subCategoryList"),
+        subCategoryMessage :$("#subCategoryMessage"),
     }
     function PopulateTableData(){
-        var categoryList = selector.categoryList.dataTable({
+        var categoryList = selector.subCategoryList.dataTable({
             "processing": true,
             "serverSide": false,
             "filter": true,
@@ -18,14 +18,14 @@
 
     window.onload = function (){
         PopulateTableData();
-        var errorMessage = selector.categoryMessage.val();
-        selector.categoryMessage.val('');
+        var errorMessage = selector.subCategoryMessage.val();
+        selector.subCategoryMessage.val('');
         
         if (errorMessage && errorMessage =="success") {
-            Success('Category Created Successfully');
+            Success('Sub Category Created Successfully');
         }
         else if(errorMessage && errorMessage =="update"){
-            Success('Category Updated Successfully');
+            Success('Sub Category Updated Successfully');
         }
         else if(errorMessage && errorMessage =="failed"){
             Failed('Name is already taken');

@@ -1,5 +1,5 @@
 
-<div class="br-logo"><a href="#"><span></span>Online Order System<span></span></a></div>
+<div class="br-logo"><a href="#"><span></span>Online Food Service<span></span></a></div>
     <div class="br-sideleft sideleft-scrollbar">
         
         <ul style="margin-top:20px;" class="br-sideleft-menu">
@@ -16,6 +16,9 @@
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">
                     <li class="sub-item dummy_sub_company_company subcompany"><a href="Category.php" class="sub-link">Food Category</a></li>
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="SubCategory.php" class="sub-link">Food Sub Category</a></li>
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="FoodItem.php" class="sub-link">Food Items</a></li>
+                
                 </ul> 
 
             </li>

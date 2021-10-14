@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // database connection
     include("../../connection/DatabaseConnection.php");
 
     $userId = $_SESSION['user']['Id'];
@@ -11,22 +10,22 @@
             $Name = $_POST['Name'];
             $Code = $_POST['Code'];
             $IsActive = $_POST['IsActive'] == 'on' ? 1 : 0;
-            $sql = "INSERT INTO `category`(`Name`, `Code`, `IsActive`, `CreatedBy`) 
+            $sql = "INSERT INTO `subcategory`(`Name`, `Code`, `IsActive`, `CreatedBy`) 
             VALUES ('$Name', '$Code', '$IsActive', '$userId' )";
             
             $result = mysqli_query($con , $sql);
             if($result != null){
-                $_SESSION['CategoryCreate'] = 'success';
-                header('Location: ../views/Category.php');
+                $_SESSION['SubCategoryCreate'] = 'success';
+                header('Location: ../views/SubCategory.php');
             }
             else{
-                $_SESSION['CategoryCreate'] = 'failed';
-                header('Location: ../views/Category.php');
+                $_SESSION['SubCategoryCreate'] = 'failed';
+                header('Location: ../views/SubCategory.php');
             }
         } 
         catch (Throwable $th) {
-            $_SESSION['CategoryCreate'] = 'failed';
-            header('Location: ../views/Category.php');
+            $_SESSION['SubCategoryCreate'] = 'failed';
+            header('Location: ../views/SubCategory.php');
         }
         
     }
@@ -38,21 +37,21 @@
             $Name = $_POST['Name'];
             $Code = $_POST['Code'];
             $IsActive = $_POST['IsActive'] == 'on' ? 1 : 0;
-            $sql = "UPDATE `category` SET `Name`='$Name',`Code`='$Code',`IsActive`='$IsActive',`UpdatedDate`='$currentDate', UpdatedBy = '$userId' WHERE Id = '$Id'";
+            $sql = "UPDATE `subcategory` SET `Name`='$Name',`Code`='$Code',`IsActive`='$IsActive',`UpdatedDate`='$currentDate', UpdatedBy = '$userId' WHERE Id = '$Id'";
             $result = mysqli_query($con , $sql);
             if($result != null){
-                $_SESSION['CategoryCreate'] = 'update';
-                header('Location: ../views/Category.php');
+                $_SESSION['SubCategoryCreate'] = 'update';
+                header('Location: ../views/SubCategory.php');
             }
             else{
-                $_SESSION['CategoryCreate'] = 'failed';
-                header('Location: ../views/Category.php');
+                $_SESSION['SubCategoryCreate'] = 'failed';
+                header('Location: ../views/SubCategory.php');
             }
             
         } 
         catch (Throwable $th) {
-            $_SESSION['CategoryCreate'] = 'failed';
-            header('Location: ../views/Category.php');
+            $_SESSION['SubCategoryCreate'] = 'failed';
+            header('Location: ../views/SubCategory.php');
         }
     }
 ?>

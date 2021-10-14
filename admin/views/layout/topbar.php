@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <?php echo $headerName;?> - Online Order System</title>
+    <title> <?php echo $headerName;?> - Online Food Service</title>
     <style>
         .dt-button {
             background-color: #ffcb24 !important;
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="../public/bootstrapSwitch/bootstrap-switch.css">
     <link rel="stylesheet" href="../public/css/bracket.css">
     <link rel="stylesheet" href="../public/css/site.css">
-
+    <link rel="stylesheet" href="../public/select2/select2.min.css">
     <script src="../public/jquery/jquery.min.js"></script>
     
     <script src="../public/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -38,5 +38,7 @@
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css" rel="stylesheet" />
 </head>
 <body>
