@@ -16,9 +16,6 @@
     </nav>
    
 </div>
-<div class="br-pagetitle">
-    Update Category
-</div>
 
 
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">

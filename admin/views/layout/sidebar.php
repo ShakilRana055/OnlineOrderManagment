@@ -11,7 +11,7 @@
             </li> 
             <li class="br-menu-item dummy_company_menu companyCls"  >
                 <a href="#" class="br-menu-link with-sub">
-                    <i class="menu-item-icon icon fa fa-building tx-18"></i>
+                    <i class="menu-item-icon icon fas fa-drumstick-bite tx-18"></i>
                     <span class="menu-item-label">Food Management</span>
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">

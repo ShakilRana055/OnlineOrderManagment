@@ -25,7 +25,7 @@
         <div class="br-section-wrapper">
             <h6 class="br-section-label">Category List</h6>
             <div class="table-wrapper">
-                <table style="width:100%" id="categoryList" class="table display responsive nowrap">
+                <table style="width:100%" id="categoryList" class="table display responsive nowrap tableStyle">
                     <thead>
                         <tr>
                             <th>Name</th>

@@ -82,11 +82,11 @@
                                         <td>'."<img src = '$image' height = '50' width = '50' />".'</td>
                                         <td>'.$whichAvailable.'</td>
                                         <td>'.$whichStatus.'</td>
-                                        <td>'."<a class = 'btn btn-success btn-sm' href = 'CategoryUpdate.php?Id=$id' id = '$id' ><i class='fas fa-edit'></i></a>".'</td>
+                                        <td>'."<a class = 'btn btn-success btn-sm' title = 'Edit' href = 'FoodItemUpdate.php?Id=$id' id = '$id' ><i class='fas fa-edit'></i></a> <a class = 'btn btn-info btn-sm' title = 'Info' href = 'FoodItemInfo.php?Id=$id' ><i class='fa fa-info-circle'></i></a>".'</td>
                                     </tr>';
                             }
                         ?>
-                    </tbody>
+                    </tbody> 
                 </table>
             </div>
         </div>

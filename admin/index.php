@@ -26,7 +26,7 @@
 
         <div style="" class="main-agileinfo">
             <div class="agileits-top">
-                <h1 style="color:black !important;">Online Order System</h1>
+                <h1 style="color:black !important;">Online Food Service</h1>
                 <h4 style="margin-bottom:10px;color: black !important; display: flex; justify-content: center;">Sign In</h4>
                 <form class="form-horizontal" method = "post" action ="" enctype="multipart/form-data" data-parsley-validate>
                    
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div style="color: #555555; text-align:center">
-                        <span>Version: Online Order 1.0 <span style="margin-left:20px;">Release Date : 1-Nov-2021</span></span>
+                        <span>Version: Food Service 1.0 <span style="margin-left:20px;">Release Date : 1-Nov-2021</span></span>
                     </div>
                 </div>
                 

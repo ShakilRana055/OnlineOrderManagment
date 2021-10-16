@@ -13,7 +13,7 @@
             $Discount = $_POST['Discount'];
             $CategoryId = $_POST['CategoryId'];
             $SubCategoryId = $_POST['SubCategoryId'];
-            $Description = $_POST['Description'];
+            $Description = trim($_POST['Description']);
             $IsActive = $_POST['IsActive'] == 'on' ? 1 : 0;
             $IsAvailable = $_POST['IsAvailable'] == 'on' ? 1 : 0;
 
@@ -43,7 +43,6 @@
 
                             $date   = new DateTime(); //this returns the current date time
                             $result = $date->format('Y-m-d-H-i-s');
-                            echo $result . "<br>";
                             $krr    = explode('-', $result);
                             $timeResult = implode("", $krr);
 
@@ -78,23 +77,74 @@
         {
             $Id = $_POST['Id'];
             $Name = $_POST['Name'];
-            $Code = $_POST['Code'];
-            $IsActive = $_POST['IsActive'] == 'on' ? 1 : 0;
-            $sql = "UPDATE `category` SET `Name`='$Name',`Code`='$Code',`IsActive`='$IsActive',`UpdatedDate`='$currentDate', UpdatedBy = '$userId' WHERE Id = '$Id'";
-            $result = mysqli_query($con , $sql);
-            if($result != null){
-                $_SESSION['FoodItemCreate'] = 'update';
-                header('Location: ../views/FoodItem.php');
+            $Price = $_POST['Price'];
+            $Discount = $_POST['Discount'];
+            $CategoryId = $_POST['CategoryId'];
+            $SubCategoryId = $_POST['SubCategoryId'];
+            $Description = trim($_POST['Description']);
+            $IsActive = isset($_POST['IsActive']) && $_POST['IsActive']  == 'on' ? 1 : 0;
+            $IsAvailable = isset($_POST['IsAvailable']) && $_POST['IsAvailable'] == 'on' ? 1 : 0;
+            
+            $DisplayPicture = $_FILES['DisplayPicture']['name'];
+            $displayPictureUrl = '';
+           
+            $sql = '';
+
+            if($DisplayPicture != null){
+                $photoName = explode(".", basename($DisplayPicture));
+                $displayPictureUrl = "public/image/".time()."items.".$photoName[1];
+                $sql = "UPDATE `fooditem` SET `Name`='$Name',`Price`= '$Price',`Discount`= '$Discount',`IsAvailable`= '$IsAvailable',`IsActive`= '$IsActive',
+                `CategoryId`= '$CategoryId',`SubCategoryId`= '$SubCategoryId',`DisplayPicture`= '$displayPictureUrl',`Description`= '$Description',`UpdatedBy`= '$userId',`UpdatedDate`= '$currentDate' WHERE Id = '$Id'";
+            
             }
             else{
-                $_SESSION['FoodItemCreate'] = 'failed';
-                header('Location: ../views/FoodItem.php');
+                $sql = "UPDATE `fooditem` SET `Name`='$Name',`Price`= '$Price',`Discount`= '$Discount',`IsAvailable`= '$IsAvailable',`IsActive`= '$IsActive',
+                `CategoryId`= '$CategoryId',`SubCategoryId`= '$SubCategoryId',`Description`= '$Description',`UpdatedBy`= '$userId',`UpdatedDate`= '$currentDate' WHERE Id = '$Id'";
             }
-            
+
+            $result = mysqli_query($con , $sql);
+
+            if($result != null){
+                if($DisplayPicture != null){
+                    move_uploaded_file( $_FILES['DisplayPicture']['tmp_name'] , '../../'.$displayPictureUrl);
+                }
+                $total = count($_FILES['OtherPicture']['name']);
+                echo "total count ".$total. "</br>";
+                if($total > 0){
+                    $deleteQuery = "DELETE FROM `images` WHERE `FoodItemId` = '$Id'";
+                    mysqli_query($con, $deleteQuery);
+                    $lastId = $Id;
+                    for($i = 0; $i < $total; $i++){
+                        $date   = new DateTime();
+                        $result = $date->format('Y-m-d-H-i-s');
+                        $krr    = explode('-', $result);
+                        $timeResult = implode("", $krr);
+
+                        $tmpFilePath = $_FILES['OtherPicture']['name'][$i];
+                        $photoName = explode(".", basename($tmpFilePath));
+                        $pictureUrl = "public/image/".$timeResult."items.".$photoName[1];
+                        $sql = "INSERT INTO `images`(`FoodItemId`, `PhotoUrl`, `CreatedBy`) 
+                                VALUES ('$lastId', '$pictureUrl', '$userId')";
+                        echo $sql;
+                        mysqli_query($con, $sql);
+                        move_uploaded_file( $_FILES['OtherPicture']['tmp_name'][$i] , '../../'.$pictureUrl);
+                        sleep(1);
+                    }
+                }
+
+                if($result != null){
+                    $_SESSION['FoodItemCreate'] = 'update';
+                    header('Location: ../views/FoodItem.php');
+                }
+                else{
+                    $_SESSION['FoodItemCreate'] = 'failed';
+                    header('Location: ../views/FoodItem.php');
+                }
+            }
         } 
-        catch (Throwable $th) {
+        catch(Throwable $th) {
             $_SESSION['FoodItemCreate'] = 'failed';
-            header('Location: ../views/Category.php');
+            header('Location: ../views/FoodItem.php');
         }
     }
 ?>

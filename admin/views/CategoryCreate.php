@@ -12,11 +12,6 @@
     </nav>
    
 </div>
-<div class="br-pagetitle">
-    Create Category
-</div>
-
-
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">
