@@ -3,11 +3,7 @@
     include("layout/topbar.php");
     include("layout/sidebar.php");
 ?>
-<style>
-    .tableStyle tr td, th{
-        text-align: center;
-    }
-</style>
+
 <div class="br-pageheader">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
         <a class="breadcrumb-item" href="index.php">Dashboard</a>

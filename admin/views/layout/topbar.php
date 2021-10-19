@@ -18,7 +18,11 @@
             color: black !important;
             border: none !important;
         }
+        .tableStyle tr td, tr th{
+            text-align: center;
+        }
     </style>
+
     <!-- vendor css -->
     <link href="../public/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.1.330/styles/kendo.default-v2.min.css" />

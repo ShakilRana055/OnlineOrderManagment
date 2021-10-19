@@ -36,8 +36,8 @@ function CreatingUser($con){
 		$superAdminPassword =  md5("Ab@123");
 		$currentDate = date('Y-m-d H:s:i');
 
-		$sql = "INSERT INTO `user`(`Name`, `Email`, `Password`, `PhotoUrl`, `RoleName`) 
-				VALUES ('Super Admin', 'superadmin@gmail.com', '$superAdminPassword', '../public/layout/images/superadmin.jpg', 'SuperAdmin')";
+		$sql = "INSERT INTO `user`(`Name`, `Email`, `Password`, `RoleName`) 
+				VALUES ('Super Admin', 'superadmin@gmail.com', '$superAdminPassword', 'SuperAdmin')";
 		$result = mysqli_query($con, $sql);
 	}
 }

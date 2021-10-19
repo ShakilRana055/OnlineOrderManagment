@@ -10,15 +10,7 @@
         <a class="breadcrumb-item active" href="#">Delivery Man List</a>
     </nav>
 </div><!-- br-pageheader -->
-<div class="br-pagetitle">
-    <div class="w-100">
-        <h4>
-            Delivery Man List
-            <a style="color:black !important;" class="btn btn-sm custombtn float-right" href="DeliveryManCreate.php" title="Add New">Add New</a>
-        </h4>
-        <p class="mg-b-0">All recorded Delivery Man listing here.</p>
-    </div>
-</div><!-- d-flex -->
+
 <input type = "hidden" value = "<?php echo $_SESSION['DeliveryManCreate']; unset($_SESSION['DeliveryManCreate']);?>" id="deliveryManMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
@@ -31,7 +23,6 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Address</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -42,7 +33,7 @@
                             $queryResult = mysqli_query($con, $sql);
                             while($row = mysqli_fetch_assoc($queryResult)){
                                 $id = $row['Id']; $name = $row['Name'];
-                                $email = $row['Email']; $phone = $row['phone']; $address = $row['Address'];
+                                $email = $row['Email']; $phone = $row['Phone']; $address = $row['Address'];
                                 $status = $row['IsActive']; $whichStatus = '';
                                 if($status == 0){
                                     $whichStatus = '<span class="badge badge-danger">Inactive</span>';
@@ -54,9 +45,7 @@
                                         <td>'.$name.'</td>
                                         <td>'.$email.'</td>
                                         <td>'.$phone.'</td>
-                                        <td>'.$address.'</td>
                                         <td>'.$whichStatus.'</td>
-                                        <td>'.$createdDate.'</td>
                                         <td>'."<a class = 'btn btn-success btn-sm' href = 'DeliveryManUpdate.php?Id=$id' id = '$id' ><i class='fas fa-edit'></i></a>".'</td>
                                     </tr>';
                             }
