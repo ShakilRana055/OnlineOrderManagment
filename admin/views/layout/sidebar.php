@@ -9,6 +9,19 @@
                     <span class="menu-item-label">Dashboard</span>
                 </a> 
             </li> 
+
+            <li class="br-menu-item dummy_company_menu companyCls"  >
+                <a href="#" class="br-menu-link with-sub">
+                    <i class="menu-item-icon icon fas fa-users tx-18"></i>
+                    <span class="menu-item-label">User Management</span>
+                </a> 
+                <ul class="br-menu-sub dummy_sub_company_menu">
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="DeliveryMan.php" class="sub-link">Delivery Man</a></li>
+                   
+                </ul> 
+
+            </li>
+
             <li class="br-menu-item dummy_company_menu companyCls"  >
                 <a href="#" class="br-menu-link with-sub">
                     <i class="menu-item-icon icon fas fa-drumstick-bite tx-18"></i>
