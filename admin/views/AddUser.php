@@ -7,7 +7,8 @@
 <div class="br-pageheader">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
         <a class="breadcrumb-item" href="index.php">Dashboard</a>
-        <a class="breadcrumb-item" href="AddUser.php">Add User</a>
+        <a class="breadcrumb-item" href="AllUser.php">All User</a>
+        <a class="breadcrumb-item" href="#">Add User</a>
     </nav>
    
 </div>
@@ -46,16 +47,7 @@
                                 <input type= "email" min = "1" name = "Email" id="Email" required class="form-control" />
                                 <span validation-for="Price" class="text-danger"></span>
                             </div>
-                            <div class="col-md-4 form-group">
-                                <label class="control-label">Password<sup>*</sup></label>
-                                <input type="password" required name = "Password" id="Password" class="form-control" />
-                                <span validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label class="control-label">Confirm Password<sup>*</sup></label>
-                                <input type="password" required name = "ConfirmPassword" id="ConfirmPassword" class="form-control" />
-                                <span validation-for="ConfirmPassword" class="text-danger"></span>
-                            </div>
+                           
                             
                             <div class="col-md-4 form-group">
                                 <label for="IsActive"> Is Active</label>
@@ -83,4 +75,3 @@
 </div>
 
 <?php include("layout/footer.php");?>
-<script src="../public/javaScript/AddUser.js"></script>

@@ -12,25 +12,24 @@
             $Email = $_POST['Email'];
             $RoleName = $_POST['RoleName'];
             $Phone = $_POST['Phone'];
-            $Password = md5($_POST['Password']);
+            $Password = md5('123');
             $IsActive = isset($_POST['IsActive']) && $_POST['IsActive'] == 'on' ? 1 : 0;
 
             $sql = "INSERT INTO `user`(`Name`, `Email`, `Password`, `Phone`, `RoleName`, `IsActive`, `CreatedBy`) 
             VALUES ('$Name', '$Email', '$Password', '$Phone' ,'$RoleName', '$IsActive', '$userId')";
-            echo $sql;
             $result = mysqli_query($con , $sql);
             if($result != null){
-                $_SESSION['AddUserCreate'] = 'success';
-                header('Location: ../views/AddUser.php');
+                $_SESSION['AllUserCreate'] = 'success';
+                header('Location: ../views/AllUser.php');
             }
             else{
-                $_SESSION['AddUserCreate'] = 'failed';
-                header('Location: ../views/AddUser.php');
+                $_SESSION['AllUserCreate'] = 'failed';
+                header('Location: ../views/AllUser.php');
             }
         } 
         catch (Throwable $th) {
             $_SESSION['AddUserCreate'] = 'failed';
-            header('Location: ../views/AddUser.php');
+            header('Location: ../views/AllUser.php');
         }
         
     }

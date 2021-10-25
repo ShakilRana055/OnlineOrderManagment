@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
 	$pass = trim($_POST['Password']);
 	$md5Password = md5($pass);
 
-	$sql = "SELECT * FROM `user` WHERE `Email` = '$user' AND `Password` = '$md5Password' AND `RoleName` != 'Customer'";
+	$sql = "SELECT * FROM `user` WHERE `Email` = '$user' AND `Password` = '$md5Password' AND `RoleName` != 'Customer' AND IsActive = '1'";
 
 	$result = mysqli_query($con, $sql);
 	$data = mysqli_fetch_assoc($result);
@@ -36,8 +36,8 @@ function CreatingUser($con){
 		$superAdminPassword =  md5("Ab@123");
 		$currentDate = date('Y-m-d H:s:i');
 
-		$sql = "INSERT INTO `user`(`Name`, `Email`, `Password`, `RoleName`) 
-				VALUES ('Super Admin', 'superadmin@gmail.com', '$superAdminPassword', 'SuperAdmin')";
+		$sql = "INSERT INTO `user`(`Name`, `Email`, `Password`, `RoleName`, `IsActive`) 
+				VALUES ('Super Admin', 'superadmin@gmail.com', '$superAdminPassword', 'SuperAdmin', '1')";
 		$result = mysqli_query($con, $sql);
 	}
 }

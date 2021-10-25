@@ -16,7 +16,7 @@
                     <span class="menu-item-label">User Management</span>
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">
-                    <li class="sub-item dummy_sub_company_company subcompany"><a href="AddUser.php" class="sub-link">Add User</a></li>  
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="AllUser.php" class="sub-link">All User</a></li>  
                     <li class="sub-item dummy_sub_company_company subcompany"><a href="DeliveryMan.php" class="sub-link">Delivery Man</a></li>
                     
                 </ul> 
