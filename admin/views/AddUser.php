@@ -23,14 +23,23 @@
                     <form action = "../controller/UserController.php" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-row">
-                        <div class="col-md-4 form-group">
+                            
+                            
+                            <div class="col-md-4 form-group">
                                 <label class="control-label">Role</label>
-                                <select  name = "RoleName" id="Role" class="form-control ">
-                                    <option value = "Admin">Admin</option>
-                                    <option value = "DeliveryMan">Delivery Man</option>
+                                <select  name = "RoleName" id="Role" class="form-control">
+                                    <?php 
+                                        $sql = "SELECT * FROM `roles`";
+                                        $queryResult = mysqli_query($con, $sql);
+                                        while($row = mysqli_fetch_assoc($queryResult)){
+                                            $name = $row['RoleName'];
+                                            echo "<option value = '$name'>$name</option>";
+                                        }
+                                    ?>
                                 </select>
-                                <span validation-for="Code" class="text-danger"></span>
+                                <span validation-for="RoleName" class="text-danger"></span>
                             </div>
+ 
 
                             <div class="col-md-4 form-group">
                                 <label class="control-label">Name<sup>*</sup></label>
@@ -58,7 +67,7 @@
                         
                         <div class="form-row">
                             <div class="col-md-4 form-group">
-                                <!-- <a class="btn custombtn float-left" href = "FoodItem.php" style="background-color: #E0E0E0 !important; color: black !important; margin-left: 15px;">Back</a> -->
+                                <a class="btn custombtn float-left" href = "AllUser.php" style="background-color: #E0E0E0 !important; color: black !important; margin-left: 15px;">Back</a>
                             </div>
                             <div class="col-md-4 form-group">
 

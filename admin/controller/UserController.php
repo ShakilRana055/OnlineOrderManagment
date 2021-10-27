@@ -39,23 +39,26 @@
         {
             $Id = $_POST['Id'];
             $Name = $_POST['Name'];
-            $Code = $_POST['Code'];
-            $IsActive = $_POST['IsActive'] == 'on' ? 1 : 0;
-            $sql = "UPDATE `category` SET `Name`='$Name',`Code`='$Code',`IsActive`='$IsActive',`UpdatedDate`='$currentDate', UpdatedBy = '$userId' WHERE Id = '$Id'";
+            $Email = $_POST['Email'];
+            $RoleName = $_POST['RoleName'];
+            $Phone = $_POST['Phone'];
+            $IsActive = isset($_POST['IsActive']) && $_POST['IsActive'] == 'on' ? 1 : 0;
+
+            $sql = "UPDATE `user` SET `Name`='$Name',`Phone`= '$Phone',`IsActive`='$IsActive',`UpdatedBy`= '$userId',`UpdatedDate`= '$currentDate' WHERE Id = '$Id'";
             $result = mysqli_query($con , $sql);
             if($result != null){
-                $_SESSION['CategoryCreate'] = 'update';
-                header('Location: ../views/Category.php');
+                $_SESSION['AllUserCreate'] = 'update';
+                header('Location: ../views/AllUser.php');
             }
             else{
-                $_SESSION['CategoryCreate'] = 'failed';
-                header('Location: ../views/Category.php');
+                $_SESSION['AllUserCreate'] = 'failed';
+                header('Location: ../views/AllUser.php');
             }
             
         } 
         catch (Throwable $th) {
-            $_SESSION['CategoryCreate'] = 'failed';
-            header('Location: ../views/Category.php');
+            $_SESSION['AllUserCreate'] = 'failed';
+            header('Location: ../views/AllUser.php');
         }
     }
 ?>

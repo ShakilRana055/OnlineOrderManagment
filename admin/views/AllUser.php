@@ -56,7 +56,7 @@
                                         <td>'.$phone.'</td>
                                         <td>'.$roleName.'</td>
                                         <td>'.$whichStatus.'</td>
-                                        <td>'."<a class = 'btn btn-success btn-sm' href = 'DeliveryManUpdate.php?Id=$id' id = '$id' ><i class='fas fa-edit'></i></a>".'</td>
+                                        <td>'."<a class = 'btn btn-success btn-sm' href = 'UpdateUser.php?Id=$id' id = '$id' ><i class='fas fa-edit'></i></a>".'</td>
                                     </tr>';
                             }
                         ?>

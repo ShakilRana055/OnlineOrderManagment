@@ -24,6 +24,7 @@
     <script src="../public/bracket/bracket.js"></script>
     <script src="../public/notify/notify.js"></script>
     <script src="../public/select2/select2.min.js"></script>
+    <script src="../public/chartjs/chart.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>

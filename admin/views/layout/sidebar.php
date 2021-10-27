@@ -16,7 +16,10 @@
                     <span class="menu-item-label">User Management</span>
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">
-                    <li class="sub-item dummy_sub_company_company subcompany"><a href="AllUser.php" class="sub-link">All User</a></li>  
+                    <?php if($_SESSION['user']['RoleName'] == 'SuperAdmin'){
+                        echo '<li class="sub-item dummy_sub_company_company subcompany"><a href="AllUser.php" class="sub-link">All User</a></li>';
+                    }
+                    ?>
                     <li class="sub-item dummy_sub_company_company subcompany"><a href="DeliveryMan.php" class="sub-link">Delivery Man</a></li>
                     
                 </ul> 
@@ -36,6 +39,18 @@
                 </ul> 
 
             </li>
+
+            <li class="br-menu-item dummy_company_menu companyCls"  >
+                <a href="#" class="br-menu-link with-sub">
+                    <i class="menu-item-icon icon fas fa-wallet tx-18"></i>
+                    <span class="menu-item-label">Order Management</span>
+                </a> 
+                <ul class="br-menu-sub dummy_sub_company_menu">
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="PendingOrder.php" class="sub-link">Order List</a></li>
+                </ul> 
+
+            </li>
+
             <li class="br-menu-item dummy_poc_menu">
                 <a href="../logout.php" class="br-menu-link">
                     <img src="../public/logout.png" alt="logo" class="logo-default logout-logo-width" />

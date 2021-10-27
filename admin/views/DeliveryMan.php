@@ -24,7 +24,6 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +45,6 @@
                                         <td>'.$email.'</td>
                                         <td>'.$phone.'</td>
                                         <td>'.$whichStatus.'</td>
-                                        <td>'."<a class = 'btn btn-success btn-sm' href = 'DeliveryManUpdate.php?Id=$id' id = '$id' ><i class='fas fa-edit'></i></a>".'</td>
                                     </tr>';
                             }
                         ?>
