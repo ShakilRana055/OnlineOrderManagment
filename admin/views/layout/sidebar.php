@@ -9,8 +9,8 @@
                     <span class="menu-item-label">Dashboard</span>
                 </a> 
             </li> 
-
-            <li class="br-menu-item dummy_company_menu companyCls"  >
+            <?php if($_SESSION['user']['RoleName'] == 'SuperAdmin' || $_SESSION['user']['RoleName'] == 'Admin'){?>
+                <li class="br-menu-item dummy_company_menu companyCls"  >
                 <a href="#" class="br-menu-link with-sub">
                     <i class="menu-item-icon icon fas fa-users tx-18"></i>
                     <span class="menu-item-label">User Management</span>
@@ -20,13 +20,20 @@
                         echo '<li class="sub-item dummy_sub_company_company subcompany"><a href="AllUser.php" class="sub-link">All User</a></li>';
                     }
                     ?>
-                    <li class="sub-item dummy_sub_company_company subcompany"><a href="DeliveryMan.php" class="sub-link">Delivery Man</a></li>
+                    <?php if($_SESSION['user']['RoleName'] == 'Admin'){
+                        echo '<li class="sub-item dummy_sub_company_company subcompany"><a href="DeliveryMan.php" class="sub-link">Delivery Man</a></li>';
+                    }
+                    ?>
+                    
                     
                 </ul> 
 
             </li>
-
-            <li class="br-menu-item dummy_company_menu companyCls"  >
+            <?php }
+            ?>
+            
+            <?php if($_SESSION['user']['RoleName'] == 'SuperAdmin' || $_SESSION['user']['RoleName'] == 'Admin'){?>
+                <li class="br-menu-item dummy_company_menu companyCls"  >
                 <a href="#" class="br-menu-link with-sub">
                     <i class="menu-item-icon icon fas fa-drumstick-bite tx-18"></i>
                     <span class="menu-item-label">Food Management</span>
@@ -39,6 +46,9 @@
                 </ul> 
 
             </li>
+            <?php }
+            ?>
+            
 
             <li class="br-menu-item dummy_company_menu companyCls"  >
                 <a href="#" class="br-menu-link with-sub">
@@ -49,6 +59,17 @@
                     <li class="sub-item dummy_sub_company_company subcompany"><a href="PendingOrder.php" class="sub-link">Order List</a></li>
                 </ul> 
 
+            </li>
+
+            <li class="br-menu-item dummy_company_menu companyCls"  >
+                <a href="#" class="br-menu-link with-sub">
+                    <i class="menu-item-icon icon fas fa-user-cog tx-18"></i>
+                    <span class="menu-item-label">Settings</span>
+                </a> 
+                <ul class="br-menu-sub dummy_sub_company_menu">
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="UpdateProfile.php" class="sub-link">Update Profile</a></li>
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="#.php" class="sub-link">Change Password</a></li>
+                </ul> 
             </li>
 
             <li class="br-menu-item dummy_poc_menu">

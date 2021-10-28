@@ -61,4 +61,29 @@
             header('Location: ../views/AllUser.php');
         }
     }
+
+    if(isset($_POST['UpdateProfile'])){
+        try 
+        {
+            $Id = $_POST['Id'];
+            $Name = $_POST['Name'];
+            $Phone = $_POST['Phone'];
+
+            $sql = "UPDATE `user` SET `Name`='$Name',`Phone`= '$Phone',`UpdatedBy`= '$userId',`UpdatedDate`= '$currentDate' WHERE Id = '$Id'";
+            $result = mysqli_query($con , $sql);
+            if($result != null){
+                $_SESSION['UpdateProfile'] = 'update';
+                header('Location: ../views/UpdateProfile.php');
+            }
+            else{
+                $_SESSION['UpdateProfile'] = 'failed';
+                header('Location: ../views/UpdateProfile.php');
+            }
+            
+        } 
+        catch (Throwable $th) {
+            $_SESSION['UpdateProfile'] = 'failed';
+            header('Location: ../views/UpdateProfile.php');
+        }
+    }
 ?>
