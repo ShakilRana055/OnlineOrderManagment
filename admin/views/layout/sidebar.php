@@ -68,7 +68,7 @@
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">
                     <li class="sub-item dummy_sub_company_company subcompany"><a href="UpdateProfile.php" class="sub-link">Update Profile</a></li>
-                    <li class="sub-item dummy_sub_company_company subcompany"><a href="#.php" class="sub-link">Change Password</a></li>
+                    <li class="sub-item dummy_sub_company_company subcompany"><a href="ChangePassword.php" class="sub-link">Change Password</a></li>
                 </ul> 
             </li>
 

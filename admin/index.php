@@ -23,7 +23,7 @@
         <div>
             <img style="width:8%; display:block; margin-left:auto; margin-right:auto" src="public/bondi.jpg" />
         </div>
-
+        <input type = "hidden" val = "<?php echo $_SESSION['PasswordChange'];?>" id = "passwordChangeMessage" >
         <div style="" class="main-agileinfo">
             <div class="agileits-top">
                 <h1 style="color:black !important;">Online Food Service</h1>
@@ -66,12 +66,18 @@
     <script src="public/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="public/parsleyjs/parsley.min.js"></script>
     <script src="public/notify/notify.js"></script>
-
+    <script src="public/javaScript/notification.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var errorMessage = "";
             if (errorMessage && errorMessage !="") {
                 $.notify(errorMessage, "error");
+            }
+
+            let message = $("#passwordChangeMessage").val();
+            $("#passwordChangeMessage").val('');
+            if (message && message =="success") {
+                Success('Category Created Successfully');
             }
         });
     </script>

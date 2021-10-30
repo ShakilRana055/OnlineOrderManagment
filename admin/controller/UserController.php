@@ -86,4 +86,27 @@
             header('Location: ../views/UpdateProfile.php');
         }
     }
+
+    if(isset($_POST['ChangePassword'])){
+        try 
+        {
+            $Password = md5($_POST['Password']);
+            $sql = "UPDATE `user` SET `Password` = '$Password', `UpdatedBy`= '$userId',`UpdatedDate`= '$currentDate' WHERE Id = '$userId'";
+            echo $sql;
+            $result = mysqli_query($con , $sql);
+            if($result != null){
+                $_SESSION['PasswordChange'] = 'success';
+                header('Location: ../index.php');
+            }
+            else{
+                $_SESSION['PasswordChange'] = 'failed';
+                header('Location: ../views/ChangePassword.php');
+            }
+            
+        } 
+        catch (Throwable $th) {
+            $_SESSION['PasswordChange'] = 'failed';
+            header('Location: ../views/ChangePassword.php');
+        }
+    }
 ?>
