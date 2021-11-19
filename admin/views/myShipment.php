@@ -1,29 +1,30 @@
 <?php 
-    $headerName = 'Order List';
+    $headerName = 'My Shipment';
     include("layout/topbar.php");
     include("layout/sidebar.php");
+    $userId = $_SESSION['user']['Id'];
 ?>
 
 <div class="br-pageheader">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
         <a class="breadcrumb-item" href="index.php">Dashboard</a>
-        <a class="breadcrumb-item active" href="#">Order List</a>
+        <a class="breadcrumb-item active" href="#">My Shipment</a>
     </nav>
 </div><!-- br-pageheader -->
 
-<input type = "hidden" value = "<?php echo $_SESSION['PendingOrderList']; unset($_SESSION['PendingOrderList']);?>" id="pendingOrderListMessage">
+<input type = "hidden" value = "<?php echo $_SESSION['myShipmentList']; unset($_SESSION['myShipmentList']);?>" id="myShipmentListMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">
-            <h6 class="br-section-label">Order List</h6>
+            <h6 class="br-section-label">Shipment List</h6>
             <div class="table-wrapper">
-                <table style="width:100%" id="pendingOrderList" class="table display responsive nowrap tableStyle">
+                <table style="width:100%" id="myShipmentList" class="table display responsive nowrap tableStyle">
                     <thead>
                         <tr>
                             <th>Invoice No.</th>
                             <th>Customer Name</th>
                             <th>Address</th>
-                            <th>Sub Total</th>
+                            <th>Phone</th>
                             <th>Grand Total</th>
                             <th>Discount</th>
                             <th>Order Date</th>
@@ -34,10 +35,10 @@
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT P.*, CUS.Name CustomerName,CUS.Address
+                            $sql = "SELECT P.*, CUS.Name CustomerName,CUS.Address, CUS.Phone
                                     FROM invoice P
                                     LEFT JOIN user CUS ON CUS.Id = P.CustomerId
-                                    WHERE Status in ('Pending', 'Shipment')
+                                    WHERE Status in ('Shipping', 'Delivered') AND P.DeliveryManId = '$userId'
                                     ORDER BY Id DESC";
                             $queryResult = mysqli_query($con, $sql);
                             foreach ($queryResult as $row){
@@ -45,7 +46,7 @@
                                 $invoiceNumber = $row['InvoiceNumber']; 
                                 $customerName = $row['CustomerName'];
                                 $address = $row['Address'];
-                                $subTotal = $row['SubTotal'];
+                                $Phone = $row['Phone'];
                                 $grandTotal = $row['GrandTotal'];
                                 $discount = $row['Discount'];
                                 $orderDate = $row['OrderDate'];
@@ -53,16 +54,13 @@
                                 $Status = $row['Status'];
 
                                 $whichStatus = '';
-                                if($Status == 'Pending') $whichStatus = '<span class="badge badge-primary">Pending</span>';
-                                else if($Status == 'Shipment') $whichStatus = '<span class="badge badge-warning">Shipment</span>';
+                                if($Status == 'Shipping') $whichStatus = '<span class="badge badge-primary">Shipping</span>';
                                 else if($Status == 'Delivered') $whichStatus = '<span class="badge badge-success">Delivered</span>'; 
                                
                                 $buttons = '';
-                                if($_SESSION['user']['RoleName'] == 'Admin' && $Status == 'Pending'){
-                                    $buttons .= "<button class = 'btn btn-success btn-sm orderProcess' action = 'shipment' title = 'Shipment' url = '../controller/PendingOrderController.php?shipmentId=$id' ><i class='fas fa-ship'></i></button>";
-                                }
-                                else if($_SESSION['user']['RoleName'] == 'DeliveryMan' && $Status == 'Shipment'){
-                                    $buttons .= "<button class = 'btn btn-success btn-sm orderProcess' action = 'takeOrder' title = 'Take Order' url = '../controller/PendingOrderController.php?takeOrder=$id' ><i class='fas fa-truck'></i></button>";
+                                if($Status == 'Shipping'){
+                                    $buttons .= "<button class = 'btn btn-danger btn-sm orderProcess' action = 'cancel' title = 'Cancel' url = '../controller/PendingOrderController.php?orderCancel=$id' ><i class='fas fa-window-close'></i></button>";
+                                    $buttons .= "<button class = 'btn btn-success btn-sm orderProcess' action = 'deliver' title = 'Delivered' url = '../controller/PendingOrderController.php?deliverOrder=$id' ><i class='fas fa-money-bill-wave'></i></button>";
                                 }
                                 $buttons .= "<a class = 'btn btn-info btn-sm' title = 'Info' href = 'FoodItemInfo.php?Id=$id' ><i class='fa fa-info-circle'></i></a>";
 
@@ -70,7 +68,7 @@
                                         <td>'.$invoiceNumber.'</td>
                                         <td>'.$customerName.'</td>
                                         <td>'.$address.'</td>
-                                        <td>'.$subTotal.'</td>
+                                        <td>'.$Phone.'</td>
                                         <td>'.$grandTotal.'</td>
                                         <td>'.$discount.'</td>
                                         <td>'.$orderDate.'</td>
@@ -88,4 +86,4 @@
 </div>
 
 <?php include("layout/footer.php");?>
-<script src="../public/javaScript/PendingOrder.js"></script>
+<script src="../public/javaScript/MyShipment.js"></script>

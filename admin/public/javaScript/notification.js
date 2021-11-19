@@ -14,3 +14,20 @@ function Failed(message){
         'error'
       )
 }
+
+function Decision (message, buttonName){
+  Swal.fire({
+    title: message,
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: buttonName
+  }).then((result) => {
+    if (result.isConfirmed) {
+      return true;
+    }
+    return false;
+  });
+}

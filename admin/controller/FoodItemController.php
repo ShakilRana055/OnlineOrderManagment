@@ -125,7 +125,7 @@
                         $pictureUrl = "public/image/".$timeResult."items.".$photoName[1];
                         $sql = "INSERT INTO `images`(`FoodItemId`, `PhotoUrl`, `CreatedBy`) 
                                 VALUES ('$lastId', '$pictureUrl', '$userId')";
-                        echo $sql;
+                        
                         mysqli_query($con, $sql);
                         move_uploaded_file( $_FILES['OtherPicture']['tmp_name'][$i] , '../../'.$pictureUrl);
                         sleep(1);

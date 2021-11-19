@@ -1,7 +1,10 @@
+
 (function(){
     let selector = {
         pendingOrderList : $("#pendingOrderList"),
         pendingOrderListMessage :$("#pendingOrderListMessage"),
+        shipmentMessage :$("#shipmentMessage"),
+        orderProcess: '.orderProcess',
     }
     function PopulateTableData(){
         var categoryList = selector.pendingOrderList.dataTable({
@@ -15,17 +18,47 @@
             "order": [[9, "desc"]],
         });
     }
-
+    class Process {
+        Proceed(url, buttonName, message){
+            Swal.fire({
+                title: message,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: buttonName
+              }).then((result) => {
+                if (result.value) {
+                    window.location.href=url, true;
+                }
+            });
+        }
+        
+    }
+    let process = new Process();
     window.onload = function (){
         PopulateTableData();
         var errorMessage = selector.pendingOrderListMessage.val();
         selector.pendingOrderListMessage.val('');
         
-        if (errorMessage && errorMessage =="success") {
-            Success('Successfully Assigned');
+        if (errorMessage && errorMessage =="shipment") {
+            Success('Successfully Shipped');
+        }
+        else if(errorMessage && errorMessage =="orderTaken"){
+            Success('Order Taken Successfully');
         }
         else if(errorMessage && errorMessage =="failed"){
             Failed('Something went wrong!');
         }
     }
+    
+    $(document).on("click", selector.orderProcess, function(){
+        let url = $(this).attr("url");
+        let action = $(this).attr('action');
+        if( action == 'shipment')
+            process.Proceed(url, 'Yes! Ship it', 'Are you sure to Ship?');
+        else if(action == 'takeOrder')
+            process.Proceed(url, 'Yes! Take it', 'Are you sure to Take Order?');
+        
+    });
 })();

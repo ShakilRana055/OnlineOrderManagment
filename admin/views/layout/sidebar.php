@@ -57,8 +57,12 @@
                 </a> 
                 <ul class="br-menu-sub dummy_sub_company_menu">
                     <li class="sub-item dummy_sub_company_company subcompany"><a href="PendingOrder.php" class="sub-link">Order List</a></li>
+                    <?php if($_SESSION['user']['RoleName'] == 'DeliveryMan'){
+                        echo '<li class="sub-item dummy_sub_company_company subcompany"><a href="myShipment.php" class="sub-link">My Shipment</a></li>';
+                    }
+                    ?>
                 </ul> 
-
+                
             </li>
 
             <li class="br-menu-item dummy_company_menu companyCls"  >
