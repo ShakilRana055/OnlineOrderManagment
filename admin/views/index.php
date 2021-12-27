@@ -2,6 +2,8 @@
     $headerName = 'Dashboard';
     include("layout/topbar.php");
     include("layout/sidebar.php");
+    $userRole = $_SESSION['user']['RoleName'];
+    $userId = $_SESSION['user']['Id'];
 ?>
 
 <div class="br-pageheader">
@@ -14,9 +16,16 @@
     <div class="br-pagebody">
         <div class="br-section-wrapper">
             <h6 class="br-section-label">Summary</h6>
+            <?php if($userRole == 'Admin' || $userRole == 'SuperAdmin'){?>
             <div class="table-wrapper">
                 <canvas id="bar-chart-grouped" width="800" height="200"></canvas>
             </div>
+            <?php }?>
+            <?php if($userRole == 'DeliveryMan'){?>
+            <div class="table-wrapper">
+                <canvas id="bar-chart-deliveryMan" width="800" height="200"></canvas>
+            </div>
+            <?php }?>
         </div>
     </div>
 </div>
@@ -30,13 +39,24 @@
                     <div class="table-wrapper">
                         <h3 id="todaysOrder" style = "text-align:center;">
                             <?php
-                                $date = date('Y-m-d');
-                                $sqlQuery = "SELECT ROUND(SUM(SubTotal)) SubTotal 
-                                            FROM invoice 
-                                            WHERE OrderDate = '$date' AND Status = 'Pending' 
-                                            GROUP BY OrderDate";
-                                $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
-                                echo number_format($queryResult['SubTotal'], 2, '.', ',') ."/-";
+                            $date = date('Y-m-d');
+                                if($userRole == 'Admin' || $userRole == 'SuperAdmin'){
+                                    $sqlQuery = "SELECT ROUND(SUM(SubTotal)) SubTotal 
+                                    FROM invoice 
+                                    WHERE OrderDate = '$date' AND Status = 'Pending' 
+                                    GROUP BY OrderDate";
+                                    $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
+                                    echo number_format($queryResult['SubTotal'], 2, '.', ',') ."/-";
+                                }
+                                if($userRole == 'DeliveryMan'){
+                                    $sqlQuery = "SELECT COUNT(1) Total
+                                                FROM invoice
+                                                WHERE DeliveryManId = '$userId'
+                                                AND OrderTakenDate = '$date'
+                                                GROUP BY DeliveryManId";
+                                    $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
+                                    echo number_format($queryResult['Total'], 2, '.', ',');
+                                }
                             ?>
                         </h3>
                     </div>
@@ -65,12 +85,23 @@
                         <h3 id="todayDelivered" style = "text-align:center;">
                             <?php
                                 $date = date('Y-m-d');
-                                $sqlQuery = "SELECT ROUND(SUM(SubTotal)) SubTotal 
-                                            FROM invoice 
-                                            WHERE DeliveryDate = '$date' AND Status = 'Delivered' 
-                                            GROUP BY OrderDate";
-                                $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
-                                echo number_format($queryResult['SubTotal'], 2, '.', ',') ."/-";
+                                if($userRole == 'Admin' || $userRole == 'SuperAdmin'){
+                                    $sqlQuery = "SELECT ROUND(SUM(SubTotal)) SubTotal 
+                                                FROM invoice 
+                                                WHERE DeliveryDate = '$date' AND Status = 'Delivered' 
+                                                GROUP BY DeliveryDate";
+                                    $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
+                                    echo number_format($queryResult['SubTotal'], 2, '.', ',') ."/-";
+                                }
+                                if($userRole == 'DeliveryMan'){
+                                    $sqlQuery = "SELECT COUNT(1) Total
+                                                FROM invoice
+                                                WHERE DeliveryManId = '$userId'
+                                                AND DeliveryDate = '$date'
+                                                GROUP BY DeliveryDate";
+                                    $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
+                                    echo number_format($queryResult['Total'], 2, '.', ',');
+                                }
                             ?>
                         </h3>
                     </div>
@@ -81,63 +112,4 @@
 </div>
 
 <?php include("layout/footer.php");?>
-
-<script>
-    (function () {
-        let selector = {
-            labels: [],
-            order: [],
-            deliver:[],
-        }
-
-        function GenerateChart() {
-            new Chart(document.getElementById("bar-chart-grouped"), {
-                type: 'bar',
-                data: {
-                    labels: selector.labels,
-                    datasets: [
-                        {
-                            label: "Order",
-                            backgroundColor: "#00ff99",
-                            data: selector.order,
-                        }, {
-                            label: "Deliver",
-                            backgroundColor: "#ff1a1a",
-                            data: selector.deliver,
-                        }
-                    ]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Order & Deliver'
-                    }
-                }
-            });
-        }
-        function GatheringInformationForChart() {
-             $.ajax({
-                url: "../controller/DashboardController.php",
-                method: "GET",
-                data: ({'search': 'search'}),
-                success: function(response){
-                    let conversion = JSON.parse(response);
-                    selector.labels = conversion.days;
-                    selector.order = conversion.order;
-                    selector.deliver = conversion.deliver;
-                    GenerateChart();
-                }
-            })
-            
-        }
-        function ShowTime() {
-            var dt = new Date();
-            document.getElementById("dateTime")
-                .innerHTML = dt.toLocaleTimeString();
-        }  
-        window.onload = function () {
-            GatheringInformationForChart();
-            setInterval(ShowTime, 1000);
-        }
-    })();
-</script>
+<script src="../public/javaScript/Index.js"></script>

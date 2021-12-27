@@ -44,8 +44,8 @@
         if (errorMessage && errorMessage =="orderCancel") {
             Success('Order Cancelled successfully');
         }
-        else if(errorMessage && errorMessage =="orderTaken"){
-            Success('Order Taken Successfully');
+        else if(errorMessage && errorMessage =="delivered"){
+            Success('Order Delivered Successfully');
         }
         else if(errorMessage && errorMessage =="failed"){
             Failed('Something went wrong!');
@@ -85,7 +85,7 @@
                     let remarks = result.value[0];
                     remarks = remarks.replaceAll(' ','_');
                     url += "&remarks="+remarks;
-                    console.log(url);
+                    window.location = url, true;
                 }
             }).catch(swal.noop)
         }
