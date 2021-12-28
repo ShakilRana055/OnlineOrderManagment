@@ -1,3 +1,6 @@
+<?php
+ include('../../connection/DatabaseConnection.php');
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -33,7 +36,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="../public/img/logo.png" alt=""></a>
+            <a href="#"><img src="../public/bondi.jpg" height = "80" width = "300" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -45,7 +48,7 @@
         
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
+                <li class="active"><a href="./index.php">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -106,13 +109,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="../public/img/logo.png" alt=""></a>
+                        <a href="./index.php"><img src="../public/bondi.jpg" height = "80" width = "300" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li class="active"><a href="./index.php">Home</a></li>
                             <li><a href="./shop-grid.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
@@ -152,20 +155,19 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>All Categories</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <?php 
+                                $sql = "SELECT * FROM `category` WHERE IsActive = 1 ORDER BY Id DESC";
+                                $queryResult = mysqli_query($con, $sql);
+                                while($row = mysqli_fetch_assoc($queryResult)){
+                                    $categoryName = $row['Name'];
+                                    echo '<li>
+                                        <a href = "#">'.$categoryName.'</a>
+                                    </li>';
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -181,14 +183,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="hero__item set-bg" data-setbg="../public/img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>

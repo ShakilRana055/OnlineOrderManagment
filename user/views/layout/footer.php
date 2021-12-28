@@ -7,7 +7,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="../public/img/logo.png" alt=""></a>
+                            <a href="./index.php"><img src="../public/bondi.jpg" height = "80" width = "300" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
