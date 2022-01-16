@@ -1,5 +1,7 @@
 <?php
  include('../../connection/DatabaseConnection.php');
+ $indexPage = false;
+ $shopPage = false;
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -115,8 +117,8 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.php">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li class = "<?php echo $indexPage == true ? "active" : ''; ?>" ><a href="index.php">Home</a></li>
+                            <li class = "<?php echo $shopPage == true ? "active" : ''; ?>"><a href="shop.php">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -163,8 +165,9 @@
                                 $queryResult = mysqli_query($con, $sql);
                                 while($row = mysqli_fetch_assoc($queryResult)){
                                     $categoryName = $row['Name'];
+                                    $categoryId = $row['Id'];
                                     echo '<li>
-                                        <a href = "#">'.$categoryName.'</a>
+                                        <a href = "shop.php?categoryId='.$categoryId.'">'.$categoryName.'</a>
                                     </li>';
                                 }
                             ?>
@@ -188,3 +191,22 @@
         </div>
     </section>
     <!-- Hero Section End -->
+    <?php if($topBanner == true) {?>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="../public/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2><?php echo $title;?></h2>
+                        <div class="breadcrumb__option">
+                            <a href="index.php">Home</a>
+                            <span><?php echo $pageName;?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <?php }?>
