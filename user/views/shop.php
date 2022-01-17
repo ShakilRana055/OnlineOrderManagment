@@ -26,12 +26,13 @@
         LIMIT 3";
         $latestProductResult = mysqli_query($con, $latestProduct);
         while($row = mysqli_fetch_assoc($latestProductResult)){
+            $foodItemId = $row['Id'];
             $name = $row['Name'];
             $price = number_format($row['Price'], 2) ;
             $displayPicture = $row['DisplayPicture'];
 
             echo 
-            '<a href="#" class="latest-product__item">
+            '<a href="shop-detail.php?foodItemId='.$foodItemId.'" class="latest-product__item">
                 <div class="latest-product__item__pic">
                     <img src="../../'.$displayPicture.'" height = "15" width = "15" alt="">
                 </div>
@@ -130,6 +131,7 @@
                                     $discountPriceResult = mysqli_query($con, $discountPrice);
 
                                     while($row = mysqli_fetch_assoc($discountPriceResult)){
+                                        $foodItemId = $row['Id'];
                                         $name = $row['Name'];
                                         $displayPicture = $row['DisplayPicture'];
                                         $categoryName = $row['CategoryName'];
@@ -143,6 +145,7 @@
                                                         data-setbg="../../'.$displayPicture.'">
                                                         <div class="product__discount__percent">-'.$discountPrice.'%</div>
                                                         <ul class="product__item__pic__hover">
+                                                            <li><a href="shop-detail.php?foodItemId='.$foodItemId.'"><i class="fa fa-info-circle"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
@@ -210,6 +213,7 @@
                                         <div class="product__item">
                                             <div class="product__item__pic set-bg" data-setbg="../../'.$displayPicture.'">
                                                 <ul class="product__item__pic__hover">
+                                                    <li><a href="shop-detail.php?foodItemId='.$foodItemId.'"><i class="fa fa-info-circle"></i></a></li>
                                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
