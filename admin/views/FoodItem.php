@@ -19,7 +19,7 @@
         <p class="mg-b-0">All recorded Food Items listing here.</p>
     </div>
 </div><!-- d-flex -->
-<input type = "hidden" value = "<?php echo $_SESSION['FoodItemCreate']; unset($_SESSION['FoodItemCreate']);?>" id="FoodItemMessage">
+<input type = "hidden" value = "<?php echo isset($_SESSION['FoodItemCreate']) ? $_SESSION['FoodItemCreate'] : '' ; unset($_SESSION['FoodItemCreate']);?>" id="FoodItemMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">

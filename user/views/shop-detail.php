@@ -51,11 +51,11 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" id = "cartQuantity" value="1">
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <a href="" id = "addToCart" foodItemId = "<?php echo $foodItemId;?>" class="primary-btn">ADD TO CARD</a>
                         <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                         <ul>
                             <li>
@@ -78,3 +78,23 @@
     <!-- Product Details Section End -->
 
 <?php include('layout/footer.php');?>
+
+<script>
+    (fucntion(){
+        let selector = {
+            addToCart : $("#addToCart"),
+            cartQuantity : $("#cartQuantity"),
+        };
+        
+        function GenerateLink(foodItemId, quantity){
+            let saveToCartUrl = `../controller/CustomerController.php?foodItemId=${foodItemId}&&quantity=${quantity}`;
+            selector.addToCart.attr("href", saveToCartUrl);
+        }
+
+        selector.addToCart.change(function(){
+            GenerateLink($(this).attr('foodItemId'), $(this).val());
+        });
+
+        window.onload = GenerateLink(selector.cartQuantity.attr('foodItemId'), selector.cartQuantity.val());
+    })();
+</script>

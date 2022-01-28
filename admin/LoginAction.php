@@ -24,7 +24,8 @@ if(isset($_POST['submit'])){
 		header('Location: views/index.php');
 		exit;
 	}else{
-		$msg="Your Email or Password is not valid!";
+
+		$msg ="Your Email or Password is not valid!";
 	}
 }
 

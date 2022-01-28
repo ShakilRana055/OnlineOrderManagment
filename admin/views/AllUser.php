@@ -19,7 +19,7 @@
         <p class="mg-b-0">All recorded User listing here.</p>
     </div>
 </div><!-- d-flex -->
-<input type = "hidden" value = "<?php echo $_SESSION['AllUserCreate']; unset($_SESSION['AllUserCreate']);?>" id="allUserMessage">
+<input type = "hidden" value = "<?php echo isset($_SESSION['AllUserCreate']) ? $_SESSION['AllUserCreate'] : ''; unset($_SESSION['AllUserCreate']);?>" id="allUserMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">

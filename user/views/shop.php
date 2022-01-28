@@ -1,4 +1,5 @@
 <?php 
+session_start();
     $topBanner = true;
     $shopPage = true;
     $title = 'Online Food Service - Shop';
@@ -70,33 +71,6 @@
                         </div>
                         
                         <div class="sidebar__item">
-                            <h4>Popular Size</h4>
-                            <div class="sidebar__item__size">
-                                <label for="large">
-                                    Large
-                                    <input type="radio" id="large">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="medium">
-                                    Medium
-                                    <input type="radio" id="medium">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="small">
-                                    Small
-                                    <input type="radio" id="small">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="tiny">
-                                    Tiny
-                                    <input type="radio" id="tiny">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="sidebar__item">
                             <div class="latest-product__text">
                                 <h4>Latest Products</h4>
                                 <div class="latest-product__slider owl-carousel">
@@ -146,9 +120,9 @@
                                                         <div class="product__discount__percent">-'.$discountPrice.'%</div>
                                                         <ul class="product__item__pic__hover">
                                                             <li><a href="shop-detail.php?foodItemId='.$foodItemId.'"><i class="fa fa-info-circle"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="../controller/CustomerController.php?favorites='.$foodItemId.'"><i class="fa fa-heart"></i></a></li>
+                                                            <li><a href="../controller/CustomerController.php?removeCart='.$foodItemId.'"><i class="fa fa-retweet"></i></a></li>
+                                                            <li><a href="../controller/CustomerController.php?foodItemId='.$foodItemId.'&&quantity=1"><i class="fa fa-shopping-cart"></i></a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="product__discount__item__text">
@@ -214,9 +188,9 @@
                                             <div class="product__item__pic set-bg" data-setbg="../../'.$displayPicture.'">
                                                 <ul class="product__item__pic__hover">
                                                     <li><a href="shop-detail.php?foodItemId='.$foodItemId.'"><i class="fa fa-info-circle"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="../controller/CustomerController.php?favorites='.$foodItemId.'"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="../controller/CustomerController.php?removeCart='.$foodItemId.'"><i class="fa fa-retweet"></i></a></li>
+                                                    <li><a href="../controller/CustomerController.php?foodItemId='.$foodItemId.'&&quantity=1"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                             <div class="product__item__text">
@@ -238,6 +212,12 @@
                 </div>
             </div>
         </div>
+
+        <input type = "hidden" id = 'CartAdded' value = "<?php echo isset($_SESSION['CartAdded']) ? $_SESSION['CartAdded'] : ''; unset($_SESSION['CartAdded']); ?>"/>
+        <input type = "hidden" id = 'CartRemove' value = "<?php echo isset($_SESSION['CartRemove']) ? $_SESSION['CartRemove'] : ''; unset($_SESSION['CartRemove']); ?>"/>
+        <input type = "hidden" id = 'Favorites' value = "<?php echo isset($_SESSION['Favorites']) ? $_SESSION['Favorites'] : ''; unset($_SESSION['Favorites']); ?>"/>
+    
     </section>
 
 <?php include('layout/footer.php');?>
+<script src="../scripts/shopping-cart.js"></script>

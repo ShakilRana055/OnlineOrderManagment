@@ -19,7 +19,7 @@
         <p class="mg-b-0">All recorded Sub Category listing here.</p>
     </div>
 </div><!-- d-flex -->
-<input type = "hidden" value = "<?php echo $_SESSION['SubCategoryCreate']; unset($_SESSION['SubCategoryCreate']);?>" id="subCategoryMessage">
+<input type = "hidden" value = "<?php echo isset($_SESSION['SubCategoryCreate']) ? $_SESSION['SubCategoryCreate']: ''; unset($_SESSION['SubCategoryCreate']);?>" id="subCategoryMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">

@@ -46,7 +46,7 @@
                                     WHERE OrderDate = '$date' AND Status = 'Pending' 
                                     GROUP BY OrderDate";
                                     $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
-                                    echo number_format($queryResult['SubTotal'], 2, '.', ',') ."/-";
+                                    echo number_format($queryResult == null ? 0 : $queryResult['SubTotal'], 2, '.', ',') ."/-";
                                 }
                                 if($userRole == 'DeliveryMan'){
                                     $sqlQuery = "SELECT COUNT(1) Total
@@ -55,7 +55,7 @@
                                                 AND OrderTakenDate = '$date'
                                                 GROUP BY DeliveryManId";
                                     $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
-                                    echo number_format($queryResult['Total'], 2, '.', ',');
+                                    echo number_format($queryResult == null ? 0: $queryResult['Total'], 2, '.', ',');
                                 }
                             ?>
                         </h3>
@@ -91,7 +91,7 @@
                                                 WHERE DeliveryDate = '$date' AND Status = 'Delivered' 
                                                 GROUP BY DeliveryDate";
                                     $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
-                                    echo number_format($queryResult['SubTotal'], 2, '.', ',') ."/-";
+                                    echo number_format( $queryResult == null ? 0 : $queryResult['SubTotal'], 2, '.', ',') ."/-";
                                 }
                                 if($userRole == 'DeliveryMan'){
                                     $sqlQuery = "SELECT COUNT(1) Total
@@ -100,7 +100,7 @@
                                                 AND DeliveryDate = '$date'
                                                 GROUP BY DeliveryDate";
                                     $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
-                                    echo number_format($queryResult['Total'], 2, '.', ',');
+                                    echo number_format($queryResult == null ? 0 : $queryResult['Total'], 2, '.', ',');
                                 }
                             ?>
                         </h3>

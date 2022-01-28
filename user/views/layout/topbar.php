@@ -2,6 +2,10 @@
  include('../../connection/DatabaseConnection.php');
  $indexPage = false;
  $shopPage = false;
+
+$customerId = 0;
+if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">

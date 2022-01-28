@@ -23,7 +23,7 @@
         <div>
             <img style="width:8%; display:block; margin-left:auto; margin-right:auto" src="public/bondi.jpg" />
         </div>
-        <input type = "hidden" val = "<?php echo $_SESSION['PasswordChange'];?>" id = "passwordChangeMessage" >
+        <input type = "hidden" val = "<?php echo $msg;?>" id = "passwordChangeMessage" >
         <div style="" class="main-agileinfo">
             <div class="agileits-top">
                 <h1 style="color:black !important;">Online Food Service</h1>
