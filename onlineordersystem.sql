@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2022 at 02:38 PM
+-- Generation Time: Feb 04, 2022 at 02:13 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -55,6 +55,27 @@ INSERT INTO `category` (`Id`, `Name`, `Code`, `IsActive`, `CreatedDate`, `Create
 (14, 'Thai Soup', 'th-009', 0, '2021-10-13 08:10:40', 1, NULL, 0),
 (15, 'Pasta', 'pasta-0035', 1, '2021-11-14 22:19:09', 15, NULL, 0),
 (16, 'Chicken Grill', 'CHCKN-001', 1, '2022-01-12 20:34:02', 1, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `Id` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `FoodItemId` int(11) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`Id`, `UserId`, `FoodItemId`, `CreatedDate`) VALUES
+(1, 0, 3, '2022-02-04 19:07:34'),
+(2, 0, 25, '2022-02-04 19:09:24');
 
 -- --------------------------------------------------------
 
@@ -241,6 +262,20 @@ INSERT INTO `roles` (`Id`, `RoleName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shoppingcart`
+--
+
+CREATE TABLE `shoppingcart` (
+  `Id` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `FoodItemId` int(11) NOT NULL,
+  `CreatedBy` int(11) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subcategory`
 --
 
@@ -319,6 +354,12 @@ ALTER TABLE `category`
   ADD UNIQUE KEY `Name` (`Name`);
 
 --
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `fooditem`
 --
 ALTER TABLE `fooditem`
@@ -341,6 +382,12 @@ ALTER TABLE `invoice`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `shoppingcart`
+--
+ALTER TABLE `shoppingcart`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -370,6 +417,12 @@ ALTER TABLE `category`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `favorites`
+--
+ALTER TABLE `favorites`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `fooditem`
 --
 ALTER TABLE `fooditem`
@@ -392,6 +445,12 @@ ALTER TABLE `invoice`
 --
 ALTER TABLE `roles`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shoppingcart`
+--
+ALTER TABLE `shoppingcart`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `subcategory`
