@@ -68,7 +68,6 @@
     }
     #endregion
 
-        // 
     #region Added into favorites cart
     if(isset($_GET['favorites'])){
         $foodItemId = $_GET['favorites'];

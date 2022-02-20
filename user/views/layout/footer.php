@@ -48,6 +48,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
 
     <script src="../scripts/notification.js"></script>
+    <script src="../../ajax-library/AjaxOperation.js"></script>
 </body>
 
 </html>

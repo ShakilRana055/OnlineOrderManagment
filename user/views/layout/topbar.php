@@ -30,6 +30,7 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
     <link rel="stylesheet" href="../public/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../public/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -56,14 +57,10 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
             <ul>
                 <li class="active"><a href="./index.php">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
+                <?php if(isset($_SESSION['customer']))
+                        {?> 
+                            <li><a href="./shoping-cart.html">Shoping Cart</a></li> 
+                     <?php }?>
                 <li><a href="./blog.html">Blog</a></li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
@@ -123,14 +120,10 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
                         <ul>
                             <li class = "<?php echo $indexPage == true ? "active" : ''; ?>" ><a href="index.php">Home</a></li>
                             <li class = "<?php echo $shopPage == true ? "active" : ''; ?>"><a href="shop.php">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
+                            <?php if(isset($_SESSION['customer']))
+                                {?> 
+                                    <li><a href="./shoping-cart.php">Shoping Cart</a></li> 
+                            <?php }?>
                             <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
