@@ -76,15 +76,43 @@
 
     if($_POST['confirmOrder'] && $customerId > 0 ){
         $phone = $_POST['phone']; $address = $_POST['address'];
-        $deliveryDate = $_POST['deliveryDate']; $shoppingDetail = $_POST['shoppingDetail'];
+        $deliveryDate = $_POST['deliveryDate']; $invoiceDetail = $_POST['invoiceDetail'];
+        $subTotal = $_POST['subTotal']; $grandTotal = $_POST['grandTotal'];
 
         $sql = "SELECT InvoiceNumber FROM `invoice` ORDER BY Id DESC LIMIT 1";
         $result = mysqli_query($con, $sql);
         $rowNumber = mysqli_num_rows($result);
-        $info = mysqli_fetch_assoc(result);
+        $info = mysqli_fetch_assoc(mysqli_query($con, $sql));
         $invoiceNumber = AutoGenerate::InvoiceNumber($rowNumber == 0 ? "0" : $info['InvoiceNumber'], "INV-");
+        
+        $sql = "INSERT INTO invoice (`InvoiceNumber`, `CustomerId`, `Phone`, `Address`, `DeliveryDate`,`SubTotal`, `GrandTotal`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedBy`)
+                VALUES('$invoiceNumber', '$customerId', '$phone', '$address', '$deliveryDate', '$subTotal', '$grandTotal', '60', 'Pending', 'Initialy Order Place', '$currentDate' )";
+        
+        $result = mysqli_query($con, $sql);
+        $invoiceId = mysqli_insert_id($con);
+        if($result != null){
+            for($i = 0; $i < Count($invoiceDetail); $i++ ){
+                $foodItemId = $invoiceDetail[$i]['foodItemId'];
+                $unitPrice = $invoiceDetail[$i]['unitPrice'];
+                $quantity = $invoiceDetail[$i]['quantity'];
+                $discount = $invoiceDetail[$i]['discount'];
+                $totalPrice = $invoiceDetail[$i]['totalPrice'];
 
+                $sql = "INSERT INTO `invocedetail`(`InvoiceId`, `InvoiceNumber`, `FoodItemId`, `UnitPrice`, `Quantity`, `Discount`, `Price`) 
+                        VALUES ('$invoiceId', '$invoiceNumber', '$foodItemId', '$unitPrice', '$quantity', '$discount', '$totalPrice')";
+                mysqli_query($con, $sql);
+            }
 
+            $sql = "INSERT INTO `invoicehistory`(`InvoiceId`, `UserId`, `Status`, `Remarks`) 
+                    VALUES ('$invoiceId', '$customerId', 1, 'Order Placed By Customer')";
+            mysqli_query($con, $sql);
+
+            $sql = "DELETE FROM `shoppingcart` WHERE `UserId` = '$customerId'";
+            mysqli_query($con, $sql);
+        }
+
+        echo 1;
+        
 
     }
 ?>

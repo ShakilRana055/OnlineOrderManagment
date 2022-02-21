@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2022 at 08:22 AM
+-- Generation Time: Feb 21, 2022 at 05:30 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -203,7 +203,7 @@ INSERT INTO `images` (`Id`, `FoodItemId`, `PhotoUrl`, `CreatedDate`, `CreatedBy`
 CREATE TABLE `invocedetail` (
   `Id` int(11) NOT NULL,
   `InvoiceId` int(11) NOT NULL,
-  `InvoiceNumber` int(11) NOT NULL,
+  `InvoiceNumber` varchar(255) DEFAULT NULL,
   `FoodItemId` int(11) NOT NULL,
   `UnitPrice` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
@@ -211,6 +211,15 @@ CREATE TABLE `invocedetail` (
   `Price` int(11) NOT NULL,
   `CreatedDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invocedetail`
+--
+
+INSERT INTO `invocedetail` (`Id`, `InvoiceId`, `InvoiceNumber`, `FoodItemId`, `UnitPrice`, `Quantity`, `Discount`, `Price`, `CreatedDate`) VALUES
+(1, 1, 'INV-000001', 28, 456, 2, 2, 894, '2022-02-21 22:16:19'),
+(2, 1, 'INV-000001', 30, 350, 3, 1, 1039, '2022-02-21 22:16:19'),
+(3, 1, 'INV-000001', 25, 230, 1, 34, 152, '2022-02-21 22:16:19');
 
 -- --------------------------------------------------------
 
@@ -222,6 +231,8 @@ CREATE TABLE `invoice` (
   `Id` int(11) NOT NULL,
   `InvoiceNumber` varchar(30) NOT NULL,
   `CustomerId` int(11) NOT NULL,
+  `Phone` text DEFAULT NULL,
+  `Address` text DEFAULT NULL,
   `DeliveryManId` int(11) DEFAULT NULL,
   `OrderDate` date NOT NULL,
   `DeliveryDate` date NOT NULL,
@@ -242,12 +253,30 @@ CREATE TABLE `invoice` (
 -- Dumping data for table `invoice`
 --
 
-INSERT INTO `invoice` (`Id`, `InvoiceNumber`, `CustomerId`, `DeliveryManId`, `OrderDate`, `DeliveryDate`, `OrderTakenDate`, `SubTotal`, `GrandTotal`, `Discount`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedDate`, `CreatedBy`, `UpdatedDate`, `UpdatedBy`) VALUES
-(1, 'INV-000001', 10, 0, '2021-10-27', '0000-00-00', '0000-00-00', 400, 400, 0, 120, 'Pending', '', '2021-10-27 11:48:26', 10, '0000-00-00 00:00:00', 0),
-(2, 'INV-000002', 10, 0, '2021-10-27', '0000-00-00', '0000-00-00', 450, 450, 0, 120, 'Pending', '', '2021-10-27 11:48:26', 10, '0000-00-00 00:00:00', 0),
-(3, 'INV-000003', 10, 4, '2021-10-27', '0000-00-00', '2021-12-26', 300, 300, 0, 120, 'Shipping', '', '2021-10-27 11:48:26', 10, '2021-12-26 21:29:00', 4),
-(4, 'INV-000004', 10, 4, '2021-10-27', '2021-11-20', '2021-11-20', 350, 350, 0, 120, 'Delivered', 'some changes made', '2021-10-27 11:48:26', 10, '2021-11-20 12:52:05', 4),
-(5, 'INV-000005', 10, 4, '2021-10-27', '2021-11-20', '2021-11-20', 550, 550, 0, 120, 'Delivered', 'some changes', '2021-10-27 11:48:26', 10, '2021-11-20 12:51:54', 4);
+INSERT INTO `invoice` (`Id`, `InvoiceNumber`, `CustomerId`, `Phone`, `Address`, `DeliveryManId`, `OrderDate`, `DeliveryDate`, `OrderTakenDate`, `SubTotal`, `GrandTotal`, `Discount`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedDate`, `CreatedBy`, `UpdatedDate`, `UpdatedBy`) VALUES
+(1, 'INV-000001', 11, '8802434545', 'new address', NULL, '0000-00-00', '2022-02-22', '0000-00-00', 2192, 2085, 0, 60, 'Pending', 'Initialy Order Place', '2022-02-21 22:16:19', 2022, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoicehistory`
+--
+
+CREATE TABLE `invoicehistory` (
+  `Id` int(11) NOT NULL,
+  `InvoiceId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `Status` int(11) NOT NULL,
+  `Remarks` int(11) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invoicehistory`
+--
+
+INSERT INTO `invoicehistory` (`Id`, `InvoiceId`, `UserId`, `Status`, `Remarks`, `CreatedDate`) VALUES
+(1, 1, 11, 1, 0, '2022-02-21 22:16:19');
 
 -- --------------------------------------------------------
 
@@ -284,19 +313,6 @@ CREATE TABLE `shoppingcart` (
   `UpdatedBy` int(11) DEFAULT NULL,
   `UpdatedDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `shoppingcart`
---
-
-INSERT INTO `shoppingcart` (`Id`, `UserId`, `FoodItemId`, `Quantity`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`) VALUES
-(1, 10, 3, 1, 10, '2022-02-20 20:37:26', NULL, NULL),
-(2, 10, 25, 1, 10, '2022-02-20 20:37:35', NULL, NULL),
-(12, 11, 3, 4, 11, '2022-02-21 09:32:25', 11, '2022-02-21 11:57:31'),
-(13, 11, 25, 5, 11, '2022-02-21 12:02:48', 11, '2022-02-21 12:03:23'),
-(16, 11, 30, 1, 11, '2022-02-21 12:03:47', NULL, NULL),
-(17, 11, 26, 1, 11, '2022-02-21 12:03:51', NULL, NULL),
-(18, 11, 28, 1, 11, '2022-02-21 12:03:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -410,6 +426,12 @@ ALTER TABLE `invoice`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `invoicehistory`
+--
+ALTER TABLE `invoicehistory`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -469,13 +491,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `invocedetail`
 --
 ALTER TABLE `invocedetail`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -487,7 +509,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shoppingcart`
 --
 ALTER TABLE `shoppingcart`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subcategory`

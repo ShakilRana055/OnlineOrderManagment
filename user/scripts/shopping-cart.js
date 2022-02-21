@@ -69,14 +69,14 @@
                 shoppingDetail.push(jsonData);
                 self.UpdateTotalPrice(jsonData);
             });
-            console.log(shoppingDetail);
         }
 
         PopulateShoppingCart(){
             shoppingDetail = [];
             let response = ajaxOperation.GetAjaxHtmlByValue('../controller/ShoppingCartController.php', 'getTempShoppingCart');
             selector.shoppingCartList.html(response);
-            this.FillTotalPrice();
+            if (selector.shoppingCartList.length > 0)
+                this.FillTotalPrice();
         }
         SaveUpdateQuantity(data){
 
@@ -84,13 +84,13 @@
             formData.append("updateQuantity", "updateQuantity");
             formData.append("id",data.id);
             formData.append("quantity",data.quantity);
-
             let response = ajaxOperation.SaveAjax('../controller/ShoppingCartController.php', formData);
         }
 
-        SaveInvoice(data){
-            let response = ajaxOperation.SaveAjax('../controller/ShoppingCartController.php', data);
-            if(response == 1){
+        SaveInvoice(data) {
+            let response = ajaxOperation.SavePostAjax('../controller/ShoppingCartController.php', data);
+            console.log(response);
+            if (response == 1) {
                 Success('Order Confirmed!');
             }
             else{
@@ -151,15 +151,10 @@
     });
 
     selector.confirmOrder.click(function(){
-        let formData = new FormData();
-        formData.append('confirmOrder','confirmOrder');
-        formData.append('shoppingDetail', shoppingDetail);
-        formData.append('deliveryDate', selector.deliveryDate.val());
-        formData.append('phone', selector.phone.val());
-        formData.append('address', selector.address.val());
+        
         let isOk = true;
         let invoiceDetail = [];
-
+        let subTotal = 0;
         for(let i = 0; i < shoppingDetail.length; i++){
             let item = {
                 foodItemId: shoppingDetail[i].foodItemId,
@@ -168,9 +163,19 @@
                 quantity: shoppingDetail[i].quantity,
                 totalPrice: process.CalculateDiscount(shoppingDetail[i])
             };
+            subTotal += (item.unitPrice * item.quantity);
             invoiceDetail.push(item);
         }
-        console.log(invoiceDetail);
+        let formData = {
+            confirmOrder: 'confirmOrder',
+            grandTotal: selector.grandTotal.text(),
+            subTotal: subTotal,
+            deliveryDate: selector.deliveryDate.val(),
+            phone: selector.phone.val(),
+            address: selector.address.val(),
+            invoiceDetail: invoiceDetail
+        };
+
         if(selector.phone.val() == ""){
             selector.phone.css('border-color', '#f00');
             isOk = false;
@@ -180,7 +185,20 @@
             isOk = false;
         }
         if(isOk){
-           // process.SaveInvoice(formData);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Confirm it!'
+            }).then((result) => {
+                if (result.value) {
+                    process.SaveInvoice(formData);
+                }
+            });
+
         }
     });
 
