@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2022 at 02:13 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.28
+-- Generation Time: Feb 21, 2022 at 08:22 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,9 +32,9 @@ CREATE TABLE `category` (
   `Name` varchar(255) NOT NULL,
   `Code` varchar(255) NOT NULL,
   `IsActive` int(11) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
   `CreatedBy` int(11) NOT NULL,
-  `UpdatedDate` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedDate` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `UpdatedBy` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -66,16 +65,8 @@ CREATE TABLE `favorites` (
   `Id` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   `FoodItemId` int(11) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `favorites`
---
-
-INSERT INTO `favorites` (`Id`, `UserId`, `FoodItemId`, `CreatedDate`) VALUES
-(1, 0, 3, '2022-02-04 19:07:34'),
-(2, 0, 25, '2022-02-04 19:09:24');
 
 -- --------------------------------------------------------
 
@@ -95,9 +86,9 @@ CREATE TABLE `fooditem` (
   `DisplayPicture` varchar(255) DEFAULT NULL,
   `Description` text NOT NULL,
   `CreatedBy` int(11) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
   `UpdatedBy` int(11) NOT NULL,
-  `UpdatedDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+  `UpdatedDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -143,7 +134,7 @@ CREATE TABLE `images` (
   `Id` int(11) NOT NULL,
   `FoodItemId` int(11) NOT NULL,
   `PhotoUrl` varchar(255) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
   `CreatedBy` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -206,6 +197,24 @@ INSERT INTO `images` (`Id`, `FoodItemId`, `PhotoUrl`, `CreatedDate`, `CreatedBy`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invocedetail`
+--
+
+CREATE TABLE `invocedetail` (
+  `Id` int(11) NOT NULL,
+  `InvoiceId` int(11) NOT NULL,
+  `InvoiceNumber` int(11) NOT NULL,
+  `FoodItemId` int(11) NOT NULL,
+  `UnitPrice` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Discount` int(11) NOT NULL,
+  `Price` int(11) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `invoice`
 --
 
@@ -223,7 +232,7 @@ CREATE TABLE `invoice` (
   `DeliveryCharge` int(11) NOT NULL,
   `Status` varchar(20) NOT NULL,
   `Remarks` varchar(255) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
   `CreatedBy` int(11) NOT NULL,
   `UpdatedDate` datetime DEFAULT NULL,
   `UpdatedBy` int(11) NOT NULL
@@ -269,9 +278,25 @@ CREATE TABLE `shoppingcart` (
   `Id` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   `FoodItemId` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
   `CreatedBy` int(11) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `UpdatedBy` int(11) DEFAULT NULL,
+  `UpdatedDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shoppingcart`
+--
+
+INSERT INTO `shoppingcart` (`Id`, `UserId`, `FoodItemId`, `Quantity`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`) VALUES
+(1, 10, 3, 1, 10, '2022-02-20 20:37:26', NULL, NULL),
+(2, 10, 25, 1, 10, '2022-02-20 20:37:35', NULL, NULL),
+(12, 11, 3, 4, 11, '2022-02-21 09:32:25', 11, '2022-02-21 11:57:31'),
+(13, 11, 25, 5, 11, '2022-02-21 12:02:48', 11, '2022-02-21 12:03:23'),
+(16, 11, 30, 1, 11, '2022-02-21 12:03:47', NULL, NULL),
+(17, 11, 26, 1, 11, '2022-02-21 12:03:51', NULL, NULL),
+(18, 11, 28, 1, 11, '2022-02-21 12:03:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -284,7 +309,7 @@ CREATE TABLE `subcategory` (
   `Name` varchar(255) NOT NULL,
   `Code` varchar(255) NOT NULL,
   `IsActive` int(11) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
   `CreatedBy` int(11) NOT NULL,
   `UpdatedDate` datetime NOT NULL,
   `UpdatedBy` int(11) NOT NULL
@@ -315,7 +340,7 @@ CREATE TABLE `user` (
   `Address` text NOT NULL,
   `RoleName` varchar(255) NOT NULL,
   `IsActive` int(11) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
   `CreatedBy` int(11) NOT NULL,
   `UpdatedBy` int(11) NOT NULL,
   `UpdatedDate` datetime NOT NULL
@@ -373,6 +398,12 @@ ALTER TABLE `images`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `invocedetail`
+--
+ALTER TABLE `invocedetail`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
@@ -420,7 +451,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fooditem`
@@ -433,6 +464,12 @@ ALTER TABLE `fooditem`
 --
 ALTER TABLE `images`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT for table `invocedetail`
+--
+ALTER TABLE `invocedetail`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `invoice`
@@ -450,7 +487,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shoppingcart`
 --
 ALTER TABLE `shoppingcart`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `subcategory`

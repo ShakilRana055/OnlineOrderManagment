@@ -220,4 +220,4 @@ session_start();
     </section>
 
 <?php include('layout/footer.php');?>
-<script src="../scripts/shopping-cart.js"></script>
+<script src="../scripts/shop.js"></script>

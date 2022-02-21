@@ -1,4 +1,5 @@
 <?php
+
  include('../../connection/DatabaseConnection.php');
  $indexPage = false;
  $shopPage = false;
@@ -30,7 +31,6 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
     <link rel="stylesheet" href="../public/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../public/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../public/css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -94,14 +94,14 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                            <?php if(isset($_SESSION['customer']))
+                                {?> 
+                                    <a href="../controller/LoginActionController.php?logout=logout"><i class="fa fa-user"></i> Logout</a>
+                                <?php }
+                                else {?>
+                                    <a href="CustomerLogin.php"><i class="fa fa-user"></i> Login</a>
+                                <?php }?>
                             </div>
                         </div>
                     </div>

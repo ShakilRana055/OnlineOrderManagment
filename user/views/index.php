@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     $topBanner = false;
     $indexPage = true;
     $title = '';

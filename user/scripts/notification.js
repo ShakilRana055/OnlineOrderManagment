@@ -25,7 +25,7 @@ function Decision (message, buttonName){
     cancelButtonColor: '#d33',
     confirmButtonText: buttonName
   }).then((result) => {
-    if (result.isConfirmed) {
+    if (result.value) {
       return true;
     }
     return false;

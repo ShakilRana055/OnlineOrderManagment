@@ -5,15 +5,16 @@
 
     $customerId = 0;
 
-    if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
+    if(isset($_SESSION['customer'])) {
+        $customerId = $_SESSION['customer']['Id'];
+    }
 
     if($customerId == 0){
         header('Location: ../views/CustomerLogin.php');
     }
-   
-    // 
+
     #region Added into shopping cart
-    if(isset($_GET['foodItemId']) && isset($_GET['quantity'])){
+    if(isset($_GET['foodItemId']) && isset($_GET['quantity']) && $customerId > 0 ){
         $foodItemId = $_GET['foodItemId'];
         $quantity = $_GET['quantity'];
 
@@ -43,7 +44,7 @@
     #endregion
 
     #region Remove from shopping cart
-    if(isset($_GET['removeCart'])){
+    if(isset($_GET['removeCart'])  && $customerId > 0 ){
         $foodItemId = $_GET['removeCart'];
         $sqlQuery = "SELECT * FROM `shoppingcart` WHERE `UserId` = '$customerId' AND `FoodItemId` = '$foodItemId'";
         $result = mysqli_query($con, $sqlQuery);
@@ -69,7 +70,7 @@
     #endregion
 
     #region Added into favorites cart
-    if(isset($_GET['favorites'])){
+    if(isset($_GET['favorites'])  && $customerId > 0 ){
         $foodItemId = $_GET['favorites'];
         $quantity = $_GET['quantity'];
 

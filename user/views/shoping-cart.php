@@ -1,4 +1,5 @@
 <?php 
+session_start();
     $topBanner = true;
     $shopPage = true;
     $title = 'Online Food Service - Shoping- Cart';
@@ -6,10 +7,25 @@
     include('layout/topbar.php');
 ?>
 
+<?php
+    $userId = 0; 
+    if(isset($_SESSION['customer'])){
+        $userId = $_SESSION['customer']['Id'];
+    }
+
+    $sql = "SELECT * FROM user WHERE Id = '$userId'";
+    $userInfo = mysqli_fetch_assoc(mysqli_query($con, $sql));
+?>
+
 <style>
     #shopping-cart thead tr th, tbody tr td{
         text-align : center;
     }
+
+    #shopping-cart thead tr{
+        background-color: #b3e6ff;
+    }
+
 </style>
 
 
@@ -32,10 +48,27 @@
                         </thead>
                         <tbody id = 'shoppingCartList'>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan = "5" style = "text-align:right">Grand Total</td>
+                                <td style = "text-align:center;"><span id = 'grandTotal'></span> ৳</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    
+                <div class="product__details__text">
+                        <h3><?php echo $userInfo['Name'];?></h3>
+                        
+                        <table class = "table table-borderless" style = "text-align:center;">
+                            <tr><td>Email</td><td><?php echo $userInfo['Email'];?></td></tr>
+                            <tr><td>Phone</td><td><input type = "number" value = "<?php echo $userInfo['Phone'];?>" id= "phone" class = "form-control"/></td></tr>
+                            <tr><td>Address</td><td><textarea cols = "3" id= "address" class = "form-control"><?php echo $userInfo['Address'];?> </textarea></td></tr>
+                            <tr><td>Delivery Date</td><td><input type = "date" data-date-format="dd-mm-yyyy" id = "deliveryDate" class = "form-control" /></td></tr>
+                        </table>
+                        <button type="button" id = 'confirmOrder' class="btn btn-success btn-lg btn-block">Confirm Order</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,63 +76,5 @@
     <!-- Product Details Section End -->
   
 <?php include('layout/footer.php');?>
+<script src="../scripts/shopping-cart.js"></script>
 
-<script>
-    (function(){
-        let ajaxOperation = new AjaxOperation();
-        let shoppingDetail = [];
-        let selector = {
-            shoppingCartList : $("#shoppingCartList"),
-        }
-        class Process{
-            constructor() { }
-
-            CalculateDiscount(data){
-                let final = data.price - Math.round(((data.price * data.discount) / 100));
-                return final;
-            }
-
-            UpdateTotalPrice(data){
-                let serialNumber = data.serialNumber;
-                let totalprice = this.CalculateDiscount(data);
-                $('.totalPrice').each(function(){
-                    if(Number($(this).attr('serialNumber')) == serialNumber){
-                        $(this).text(totalprice);
-                    }
-                });
-            }
-            
-            FillTotalPrice(){
-                let self = this;
-                $("#shoppingCartList tr").each(function(i, row){
-                    let price = Number($(this).find('td .tempQuantity').attr('price'));
-                    let quantity = Number($(this).find('td .tempQuantity').val());
-                    let discount = Number($(this).find('td .tempQuantity').attr('discount'));
-                    let serialNumber = Number($(this).find('td .tempQuantity').attr('serialNumber'));
-                    let jsonData = {
-                        price,
-                        discount,
-                        serialNumber,
-                        quantity
-                    };
-                    shoppingDetail.push(jsonData);
-                    self.UpdateTotalPrice(jsonData);
-                });
-            }
-
-            PopulateShoppingCart(){
-                let response = ajaxOperation.GetAjaxHtmlByValue('../controller/ShoppingCartController.php', 'getTempShoppingCart');
-                selector.shoppingCartList.html(response);
-                this.FillTotalPrice();
-            }
-
-        }
-    
-        let process = new Process();
-
-        window.onload = function(){
-            process.PopulateShoppingCart();
-        }
-
-    })();
-</script>

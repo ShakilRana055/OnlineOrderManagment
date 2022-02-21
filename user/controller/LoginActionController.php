@@ -26,5 +26,11 @@
             $_SESSION['loginErrorMsg']="Your Email or Password is not valid!";
         }
     }
+
+    if(isset($_GET['logout'])){
+        session_destroy();
+        header('Location: ../views/index.php');
+        exit;
+    }
    
 ?>
