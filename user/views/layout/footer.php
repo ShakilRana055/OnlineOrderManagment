@@ -49,6 +49,22 @@
 
     <script src="../scripts/notification.js"></script>
     <script src="../../ajax-library/AjaxOperation.js"></script>
+
+    <div id="informationModal" class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="exampleModalLabel"><i class="fa fa-universal-access"><span id="modalHeading">Add Role</span> </i></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="informationModalDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

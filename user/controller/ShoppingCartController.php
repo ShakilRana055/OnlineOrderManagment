@@ -85,8 +85,8 @@
         $info = mysqli_fetch_assoc(mysqli_query($con, $sql));
         $invoiceNumber = AutoGenerate::InvoiceNumber($rowNumber == 0 ? "0" : $info['InvoiceNumber'], "INV-");
         
-        $sql = "INSERT INTO invoice (`InvoiceNumber`, `CustomerId`, `Phone`, `Address`, `DeliveryDate`,`SubTotal`, `GrandTotal`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedBy`)
-                VALUES('$invoiceNumber', '$customerId', '$phone', '$address', '$deliveryDate', '$subTotal', '$grandTotal', '60', 'Pending', 'Initialy Order Place', '$currentDate' )";
+        $sql = "INSERT INTO invoice (`InvoiceNumber`, `CustomerId`, `Phone`, `Address`, `DeliveryDate`,`SubTotal`, `GrandTotal`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedBy`, OrderDate)
+                VALUES('$invoiceNumber', '$customerId', '$phone', '$address', '$deliveryDate', '$subTotal', '$grandTotal', '60', 'Pending', 'Initialy Order Place', '$customerId', '$currentDate')";
         
         $result = mysqli_query($con, $sql);
         $invoiceId = mysqli_insert_id($con);

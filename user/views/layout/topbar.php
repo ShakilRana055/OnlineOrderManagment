@@ -31,6 +31,7 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
     <link rel="stylesheet" href="../public/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../public/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -123,9 +124,9 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
                             <?php if(isset($_SESSION['customer']))
                                 {?> 
                                     <li><a href="./shoping-cart.php">Shoping Cart</a></li> 
+                                    <li><a href="./my-cart.php">My Cart</a></li>
                             <?php }?>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            
                         </ul>
                     </nav>
                 </div>

@@ -92,6 +92,7 @@
             console.log(response);
             if (response == 1) {
                 Success('Order Confirmed!');
+                location.href = "shop.php";
             }
             else{
                 Failed('Something went wrong!');
