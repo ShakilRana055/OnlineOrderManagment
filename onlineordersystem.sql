@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2022 at 05:30 PM
+-- Generation Time: Feb 25, 2022 at 04:01 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -54,6 +54,30 @@ INSERT INTO `category` (`Id`, `Name`, `Code`, `IsActive`, `CreatedDate`, `Create
 (14, 'Thai Soup', 'th-009', 0, '2021-10-13 08:10:40', 1, NULL, 0),
 (15, 'Pasta', 'pasta-0035', 1, '2021-11-14 22:19:09', 15, NULL, 0),
 (16, 'Chicken Grill', 'CHCKN-001', 1, '2022-01-12 20:34:02', 1, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companyinformation`
+--
+
+CREATE TABLE `companyinformation` (
+  `Name` text NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Address` text NOT NULL,
+  `Phone` text NOT NULL,
+  `DeliveryCharge` int(11) NOT NULL,
+  `LogoUrl` text NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `companyinformation`
+--
+
+INSERT INTO `companyinformation` (`Name`, `Email`, `Address`, `Phone`, `DeliveryCharge`, `LogoUrl`, `CreatedDate`, `Id`) VALUES
+('ABC', 'abc@email.com', 'some address', '+8801773454', 60, '', '2022-02-25 15:21:11', 1);
 
 -- --------------------------------------------------------
 
@@ -219,7 +243,17 @@ CREATE TABLE `invocedetail` (
 INSERT INTO `invocedetail` (`Id`, `InvoiceId`, `InvoiceNumber`, `FoodItemId`, `UnitPrice`, `Quantity`, `Discount`, `Price`, `CreatedDate`) VALUES
 (1, 1, 'INV-000001', 28, 456, 2, 2, 894, '2022-02-21 22:16:19'),
 (2, 1, 'INV-000001', 30, 350, 3, 1, 1039, '2022-02-21 22:16:19'),
-(3, 1, 'INV-000001', 25, 230, 1, 34, 152, '2022-02-21 22:16:19');
+(3, 1, 'INV-000001', 25, 230, 1, 34, 152, '2022-02-21 22:16:19'),
+(4, 2, 'INV-000002', 26, 3808, 1, 4, 3656, '2022-02-25 09:22:20'),
+(5, 2, 'INV-000002', 3, 400, 1, 40, 240, '2022-02-25 09:22:20'),
+(6, 2, 'INV-000002', 25, 230, 1, 34, 152, '2022-02-25 09:22:20'),
+(7, 3, 'INV-000003', 25, 230, 1, 34, 152, '2022-02-25 09:27:34'),
+(8, 4, 'INV-000004', 25, 230, 1, 34, 152, '2022-02-25 09:29:11'),
+(9, 5, 'INV-000005', 28, 456, 4, 2, 1788, '2022-02-25 11:13:04'),
+(10, 5, 'INV-000005', 25, 230, 3, 34, 455, '2022-02-25 11:13:04'),
+(11, 5, 'INV-000005', 3, 400, 3, 40, 720, '2022-02-25 11:13:04'),
+(12, 6, 'INV-000006', 26, 3808, 1, 4, 3656, '2022-02-25 16:19:39'),
+(13, 6, 'INV-000006', 25, 230, 1, 34, 152, '2022-02-25 16:19:39');
 
 -- --------------------------------------------------------
 
@@ -254,7 +288,12 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`Id`, `InvoiceNumber`, `CustomerId`, `Phone`, `Address`, `DeliveryManId`, `OrderDate`, `DeliveryDate`, `OrderTakenDate`, `SubTotal`, `GrandTotal`, `Discount`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedDate`, `CreatedBy`, `UpdatedDate`, `UpdatedBy`) VALUES
-(1, 'INV-000001', 11, '8802434545', 'new address', NULL, '0000-00-00', '2022-02-22', '0000-00-00', 2192, 2085, 0, 60, 'Pending', 'Initialy Order Place', '2022-02-21 22:16:19', 2022, NULL, 0);
+(1, 'INV-000001', 11, '8802434545', 'new address', NULL, '2022-02-25', '2022-02-22', '0000-00-00', 2192, 2085, 0, 60, 'Pending', 'Initialy Order Place', '2022-02-21 22:16:19', 2022, NULL, 0),
+(2, 'INV-000002', 11, '012345', 'some address ', NULL, '2022-02-25', '2022-02-25', '0000-00-00', 4438, 4048, 0, 60, 'Pending', 'Initialy Order Place', '2022-02-25 09:22:20', 2022, NULL, 0),
+(3, 'INV-000003', 11, '012345', 'some address ', NULL, '2022-02-25', '2022-02-25', '0000-00-00', 230, 152, 0, 60, 'Pending', 'Initialy Order Place', '2022-02-25 09:27:34', 2022, NULL, 0),
+(4, 'INV-000004', 11, '012345', 'some address ', NULL, '2022-02-25', '2022-02-25', '0000-00-00', 230, 152, 0, 60, 'Pending', 'Initialy Order Place', '2022-02-25 09:29:11', 2022, NULL, 0),
+(5, 'INV-000005', 11, '012345', 'some address ', 3, '2022-02-25', '2022-02-25', '2022-02-25', 3714, 2963, 0, 60, 'Shipping', 'Initialy Order Place', '2022-02-25 11:13:04', 11, '2022-02-25 14:47:55', 3),
+(6, 'INV-000006', 11, '012345', 'some address ', 3, '2022-02-25', '2022-02-25', '2022-02-25', 4038, 3808, 0, 60, 'Shipping', 'Initialy Order Place', '2022-02-25 16:19:39', 11, '2022-02-25 16:46:39', 3);
 
 -- --------------------------------------------------------
 
@@ -266,8 +305,8 @@ CREATE TABLE `invoicehistory` (
   `Id` int(11) NOT NULL,
   `InvoiceId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
-  `Status` int(11) NOT NULL,
-  `Remarks` int(11) NOT NULL,
+  `Status` text NOT NULL,
+  `Remarks` text NOT NULL,
   `CreatedDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -276,7 +315,12 @@ CREATE TABLE `invoicehistory` (
 --
 
 INSERT INTO `invoicehistory` (`Id`, `InvoiceId`, `UserId`, `Status`, `Remarks`, `CreatedDate`) VALUES
-(1, 1, 11, 1, 0, '2022-02-21 22:16:19');
+(1, 5, 11, '1', 'Order Placed By Customer', '2022-02-25 11:13:04'),
+(2, 6, 11, '1', 'Order Placed By Customer', '2022-02-25 16:19:39'),
+(3, 6, 8, '2', 'Placed for Shipment', '2022-02-25 16:20:37'),
+(4, 6, 3, '3', 'Order Taken', '2022-02-25 16:21:28'),
+(5, 6, 3, '9', 'Order Cancel', '2022-02-25 16:29:41'),
+(6, 6, 3, '3', 'Order Taken', '2022-02-25 16:46:39');
 
 -- --------------------------------------------------------
 
@@ -395,6 +439,12 @@ ALTER TABLE `category`
   ADD UNIQUE KEY `Name` (`Name`);
 
 --
+-- Indexes for table `companyinformation`
+--
+ALTER TABLE `companyinformation`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `favorites`
 --
 ALTER TABLE `favorites`
@@ -470,6 +520,12 @@ ALTER TABLE `category`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `companyinformation`
+--
+ALTER TABLE `companyinformation`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
@@ -491,13 +547,19 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `invocedetail`
 --
 ALTER TABLE `invocedetail`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `invoicehistory`
+--
+ALTER TABLE `invoicehistory`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -509,7 +571,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shoppingcart`
 --
 ALTER TABLE `shoppingcart`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `subcategory`

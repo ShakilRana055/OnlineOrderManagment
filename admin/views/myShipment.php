@@ -12,7 +12,7 @@
     </nav>
 </div><!-- br-pageheader -->
 
-<input type = "hidden" value = "<?php echo $_SESSION['myShipmentList']; unset($_SESSION['myShipmentList']);?>" id="myShipmentListMessage">
+<input type = "hidden" value = "<?php echo isset($_SESSION['myShipmentList']) ? $_SESSION['myShipmentList'] : ''; unset($_SESSION['myShipmentList']);?>" id="myShipmentListMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">
@@ -62,7 +62,7 @@
                                     $buttons .= "<button class = 'btn btn-danger btn-sm orderProcess' action = 'cancel' title = 'Cancel' url = '../controller/PendingOrderController.php?orderCancel=$id' ><i class='fas fa-window-close'></i></button>";
                                     $buttons .= "<button class = 'btn btn-success btn-sm orderProcess' action = 'deliver' title = 'Delivered' url = '../controller/PendingOrderController.php?deliverOrder=$id' ><i class='fas fa-money-bill-wave'></i></button>";
                                 }
-                                $buttons .= "<a class = 'btn btn-info btn-sm' title = 'Info' href = 'FoodItemInfo.php?Id=$id' ><i class='fa fa-info-circle'></i></a>";
+                                $buttons .= "<button class = 'btn btn-info btn-sm btnInfo' title = 'Info' invoiceId='$id' ><i class='fa fa-info-circle'></i></button>";
 
                                 echo '<tr>
                                         <td>'.$invoiceNumber.'</td>

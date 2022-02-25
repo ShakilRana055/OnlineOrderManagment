@@ -24,7 +24,6 @@
                             <th>Delivery Man</th>
                             <th>Phone</th>
                             <th>Grand Total</th>
-                            <th>Discount</th>
                             <th>Order Date</th>
                             <th>Delivery Charge</th>
                             <th>Status</th>
@@ -55,14 +54,13 @@
                                 if($Status == 'Shipping') $whichStatus = '<span class="badge badge-primary">Shipping</span>';
                                 else if($Status == 'Delivered') $whichStatus = '<span class="badge badge-success">Delivered</span>'; 
                                
-                                $buttons = "<a class = 'btn btn-info btn-sm' title = 'Info' href = 'FoodItemInfo.php?Id=$id' ><i class='fa fa-info-circle'></i></a>";
-
+                                $buttons = "<button class = 'btn btn-info btn-sm btnInfo' title = 'Info' invoiceId='$id' ><i class='fa fa-info-circle'></i></button>";
+                                $buttons .= "<button class = 'btn btn-success btn-sm btnHistory' title = 'Info' invoiceId='$id' ><i class='fa fa-history'></i></button>";
                                 echo '<tr>
                                         <td>'.$invoiceNumber.'</td>
                                         <td>'.$deliveryManName.'</td>
                                         <td>'.$Phone.'</td>
                                         <td>'.$grandTotal.'</td>
-                                        <td>'.$discount.'</td>
                                         <td>'.$orderDate.'</td>
                                         <td>'.$deliveryCharge.'</td>
                                         <td>'.$whichStatus.'</td>
@@ -80,6 +78,18 @@
 <?php include("layout/footer.php");?>
 <script>
     (function(){
+        let selector = {
+            btnInfo: '.btnInfo',
+            btnHistory : '.btnHistory'
+        };
+        let ajaxOperation = new AjaxOperation();
+        let modalOperation = new ModalOperation();
+        let modal = {
+            informationModal: "#informationModal",
+            modalHeading: $("#modalHeading"),
+            informationModalDiv: "#informationModalDiv",
+        };
+
         function PopulateTableData(){
             var shipmentStatusList = $("#shipmentStatusList").dataTable({
                 "processing": true,
@@ -89,10 +99,28 @@
                 "autoWidth": false,
                 'dom': "<'row'<'col-sm-3'l><'col-sm-5 text-center'B><'col-sm-4'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                 "lengthMenu": [[10, 50, 100, 150, 200, 500], [10, 50, 100, 150, 200, 500]],
-                "order": [[8, "desc"]],
+                "order": [[7, "desc"]],
             });
         }
 
         window.onload = PopulateTableData();
+
+        $(document).on("click", selector.btnInfo, function () {
+            let invoiceId = $(this).attr('invoiceId');
+            let response = ajaxOperation.GetAjaxHtmlByValue('./htmlHelper/invoiceDetail.php', invoiceId);
+            modal.modalHeading.text('Invoice Details');
+            modalOperation.ModalStatic(modal.informationModal);
+            modalOperation.ModalOpenWithHtml(modal.informationModal, modal.informationModalDiv, response);
+        });
+
+        
+        $(document).on("click", selector.btnHistory, function () {
+            let invoiceId = $(this).attr('invoiceId');
+            let response = ajaxOperation.GetAjaxHtmlByValue('./htmlHelper/invoiceHistory.php', invoiceId);
+            modal.modalHeading.text('Invoice History');
+            modalOperation.ModalStatic(modal.informationModal);
+            modalOperation.ModalOpenWithHtml(modal.informationModal, modal.informationModalDiv, response);
+        });
+
     })();
 </script>

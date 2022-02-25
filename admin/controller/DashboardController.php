@@ -18,16 +18,16 @@
 
             for($i = 1; $i <= $day; $i++){
                 
-                $sqlQuery = "SELECT Round(SUM(GrandTotal)) GrandTotal
+                $sqlQuery = "SELECT Round(SUM(SubTotal)) GrandTotal
                             FROM invoice
-                            WHERE OrderDate = '$initialThisMonth' AND Status = 'Pending'";
+                            WHERE OrderDate = '$initialThisMonth'";
                 $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
                 
                 $days[] = $i; //$initialThisMonth;
                 $purchase[] = $queryResult['GrandTotal']; //number_format($queryResult['GrandTotal'], 2, '.', ',');
 
 
-                $sqlQuery = "SELECT Round(SUM(GrandTotal)) GrandTotal 
+                $sqlQuery = "SELECT Round(SUM(SubTotal)) GrandTotal 
                             FROM invoice WHERE DeliveryDate = '$initialThisMonth' AND Status = 'Delivered'";
                 $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
 
@@ -62,7 +62,7 @@
 
             for($i = 1; $i <= $day; $i++){
                 
-                $sqlQuery = "SELECT COALESCE(COUNT(1), 0) TotalOrderTaken
+                $sqlQuery = "SELECT COUNT(1) TotalOrderTaken
                             FROM invoice
                             WHERE DeliveryManId = '$userId'
                             AND OrderTakenDate = '$initialThisMonth'
@@ -70,17 +70,17 @@
                 $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
                 
                 $days[] = $i; 
-                $purchase[] = $queryResult['TotalOrderTaken'] == null ? 0 : $queryResult['TotalOrderTaken'] ; 
+                $purchase[] = $queryResult == null ? 0 : $queryResult['TotalOrderTaken'] ; 
 
 
-                $sqlQuery = "SELECT COALESCE(COUNT(1), 0) TotalDelivery
+                $sqlQuery = "SELECT COUNT(1) TotalDelivery
                             FROM invoice
                             WHERE DeliveryManId = '$userId'
-                            AND DeliveryDate = '$initialThisMonth'
+                            AND DeliveryDate = '$initialThisMonth' AND Status = 'Delivered'
                             GROUP BY DeliveryDate";
                 $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
 
-                $sales[] = $queryResult['TotalDelivery'] == null ? 0 : $queryResult['TotalDelivery'];
+                $sales[] = $queryResult == null ? 0 : $queryResult['TotalDelivery'];
 
                 $initialThisMonth = $year.'-'.$month."-".($i+1);
             }

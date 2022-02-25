@@ -5,7 +5,17 @@
         myShipmentListMessage :$("#myShipmentListMessage"),
         shipmentMessage :$("#shipmentMessage"),
         orderProcess: '.orderProcess',
+        btnInfo: '.btnInfo',
     }
+
+    let ajaxOperation = new AjaxOperation();
+    let modalOperation = new ModalOperation();
+    let modal = {
+        informationModal: "#informationModal",
+        modalHeading: $("#modalHeading"),
+        informationModalDiv: "#informationModalDiv",
+    };
+
     function PopulateTableData(){
         var categoryList = selector.myShipmentList.dataTable({
             "processing": true,
@@ -15,7 +25,7 @@
             "autoWidth": false,
             'dom': "<'row'<'col-sm-3'l><'col-sm-5 text-center'B><'col-sm-4'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             "lengthMenu": [[10, 50, 100, 150, 200, 500], [10, 50, 100, 150, 200, 500]],
-            "order": [[9, "desc"]],
+            "order": [[8, "desc"]],
         });
     }
     class Process {
@@ -51,6 +61,7 @@
             Failed('Something went wrong!');
         }
     }
+
     
     $(document).on("click", selector.orderProcess, function(){
         let url = $(this).attr("url");
@@ -91,4 +102,13 @@
         }
         
     });
+
+    $(document).on("click", selector.btnInfo, function () {
+        let invoiceId = $(this).attr('invoiceId');
+        let response = ajaxOperation.GetAjaxHtmlByValue('./htmlHelper/invoiceDetail.php', invoiceId);
+        modal.modalHeading.text('Invoice Details');
+        modalOperation.ModalStatic(modal.informationModal);
+        modalOperation.ModalOpenWithHtml(modal.informationModal, modal.informationModalDiv, response);
+    });
+
 })();

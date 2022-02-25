@@ -12,6 +12,8 @@
     </nav>
 </div>
 
+<input type= "hidden" value = "<?php echo $userRole;?>" id="userRole" />
+
 <div class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">
@@ -43,7 +45,7 @@
                                 if($userRole == 'Admin' || $userRole == 'SuperAdmin'){
                                     $sqlQuery = "SELECT ROUND(SUM(SubTotal)) SubTotal 
                                     FROM invoice 
-                                    WHERE OrderDate = '$date' AND Status = 'Pending' 
+                                    WHERE OrderDate = '$date'
                                     GROUP BY OrderDate";
                                     $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
                                     echo number_format($queryResult == null ? 0 : $queryResult['SubTotal'], 2, '.', ',') ."/-";
@@ -97,7 +99,7 @@
                                     $sqlQuery = "SELECT COUNT(1) Total
                                                 FROM invoice
                                                 WHERE DeliveryManId = '$userId'
-                                                AND DeliveryDate = '$date'
+                                                AND DeliveryDate = '$date' AND Status = 'Delivered' 
                                                 GROUP BY DeliveryDate";
                                     $queryResult = mysqli_fetch_assoc(mysqli_query($con, $sqlQuery));
                                     echo number_format($queryResult == null ? 0 : $queryResult['Total'], 2, '.', ',');

@@ -32,7 +32,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
 
     <script src="../public/javaScript/notification.js"></script>
-    
+    <script src="../../ajax-library/AjaxOperation.js"></script>
+
     <script src=" https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -61,5 +62,20 @@
         });
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <div id="informationModal" class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="exampleModalLabel"><i class="fa fa-universal-access"><span id="modalHeading">Add Role</span> </i></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="informationModalDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

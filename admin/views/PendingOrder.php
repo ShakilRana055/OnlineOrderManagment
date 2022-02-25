@@ -11,7 +11,7 @@
     </nav>
 </div><!-- br-pageheader -->
 
-<input type = "hidden" value = "<?php echo $_SESSION['PendingOrderList']; unset($_SESSION['PendingOrderList']);?>" id="pendingOrderListMessage">
+<input type = "hidden" value = "<?php echo isset($_SESSION['PendingOrderList']) ? $_SESSION['PendingOrderList'] : '' ; unset($_SESSION['PendingOrderList']);?>" id="pendingOrderListMessage">
 <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
     <div class="br-pagebody">
         <div class="br-section-wrapper">
@@ -64,7 +64,7 @@
                                 else if($_SESSION['user']['RoleName'] == 'DeliveryMan' && $Status == 'Shipment'){
                                     $buttons .= "<button class = 'btn btn-success btn-sm orderProcess' action = 'takeOrder' title = 'Take Order' url = '../controller/PendingOrderController.php?takeOrder=$id' ><i class='fas fa-truck'></i></button>";
                                 }
-                                $buttons .= "<a class = 'btn btn-info btn-sm' title = 'Info' href = 'FoodItemInfo.php?Id=$id' ><i class='fa fa-info-circle'></i></a>";
+                                $buttons .= "<button class = 'btn btn-info btn-sm btnInfo' title = 'Info' invoiceId='$id' ><i class='fa fa-info-circle'></i></button>";
 
                                 echo '<tr>
                                         <td>'.$invoiceNumber.'</td>

@@ -5,9 +5,18 @@
         pendingOrderListMessage :$("#pendingOrderListMessage"),
         shipmentMessage :$("#shipmentMessage"),
         orderProcess: '.orderProcess',
+        btnInfo: '.btnInfo',
     }
+    let ajaxOperation = new AjaxOperation();
+    let modalOperation = new ModalOperation();
+    let modal = {
+        informationModal: "#informationModal",
+        modalHeading: $("#modalHeading"),
+        informationModalDiv: "#informationModalDiv",
+    };
+
     function PopulateTableData(){
-        var categoryList = selector.pendingOrderList.dataTable({
+        var pendingOrderList = selector.pendingOrderList.dataTable({
             "processing": true,
             "serverSide": false,
             "filter": true,
@@ -61,4 +70,13 @@
             process.Proceed(url, 'Yes! Take it', 'Are you sure to Take Order?');
         
     });
+
+    $(document).on("click", selector.btnInfo, function () {
+        let invoiceId = $(this).attr('invoiceId');
+        let response = ajaxOperation.GetAjaxHtmlByValue('./htmlHelper/invoiceDetail.php', invoiceId);
+        modal.modalHeading.text('Invoice Details');
+        modalOperation.ModalStatic(modal.informationModal);
+        modalOperation.ModalOpenWithHtml(modal.informationModal, modal.informationModalDiv, response);
+    });
+
 })();

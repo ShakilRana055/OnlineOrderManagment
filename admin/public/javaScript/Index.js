@@ -2,7 +2,8 @@
     let selector = {
         labels: [],
         order: [],
-        deliver:[],
+        deliver: [],
+        userRole: $("#userRole"),
     }
     let deliverySelector = {
         labels: [],
@@ -34,7 +35,7 @@
             }
         });
     }
-    function GenerateDeliveryChartChart()
+    function GenerateDeliveryChart()
     {
         new Chart(document.getElementById("bar-chart-deliveryMan"), {
             type: 'bar',
@@ -60,6 +61,7 @@
             }
         });
     }
+
     function GatheringInformationForChart() {
          $.ajax({
             url: "../controller/DashboardController.php",
@@ -68,7 +70,6 @@
             async: false,
             success: function(response){
                 let conversion = JSON.parse(response);
-                console.log(response);
                 selector.labels = conversion.days;
                 selector.order = conversion.order;
                 selector.deliver = conversion.deliver;
@@ -81,17 +82,16 @@
         $.ajax({
             url: "../controller/DashboardController.php",
             method: "GET",
-            data: ({'deliveryMan': 'deliveryMan'}),
+            data: ({ 'deliveryMan': 'deliveryMan' }),
             async: false,
-            success: function(response){
+            success: function (response) {
                 let conversion = JSON.parse(response);
-                console.log(response);
                 deliverySelector.labels = conversion.days;
                 deliverySelector.order = conversion.order;
                 deliverySelector.deliver = conversion.deliver;
-                GenerateDeliveryChartChart();
+                GenerateDeliveryChart();
             }
-        })
+        });
     }
     function ShowTime() {
         var dt = new Date();
@@ -99,8 +99,13 @@
             .innerHTML = dt.toLocaleTimeString();
     }  
     window.onload = function () {
-        GatheringInformationForChart();
+        console.log(selector.userRole.val());
+        if (selector.userRole.val() != 'DeliveryMan') {
+            GatheringInformationForChart();
+        }
+        else {
+            GatheringInformationForDeliveryMan();
+        }
         setInterval(ShowTime, 1000);
-        GatheringInformationForDeliveryMan();
     }
 })();
