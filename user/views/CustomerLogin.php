@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,8 +22,6 @@
   </head>
   <body>
   
-
-  
   <div class="content">
     <div class="container">
       <div class="row">
@@ -36,7 +34,18 @@
               <div class="mb-4">
               <h3><strong>Sign In </strong></h3>
               <p class="mb-4">Order your Food</p>
-              <p class="mb-4" style = "color:red;"><?php echo isset($_SESSION['loginErrorMsg']) ? $_SESSION['loginErrorMsg'] : ''; unset($_SESSION['loginErrorMsg']);?></p>
+              <p class="mb-4" style = "color:red;">
+              <?php 
+                    if(isset($_SESSION['loginErrorMsg']) == true){
+                      echo $_SESSION['loginErrorMsg'];
+                      unset($_SESSION['loginErrorMsg']);
+                    }
+                    else{
+                      echo "";
+                    }
+                    
+              ?>
+            </p>
             </div>
             <form action="../controller/LoginActionController.php" method="post">
               <div class="form-group first">

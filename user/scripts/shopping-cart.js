@@ -89,7 +89,6 @@
 
         SaveInvoice(data) {
             let response = ajaxOperation.SavePostAjax('../controller/ShoppingCartController.php', data);
-            console.log(response);
             if (response == 1) {
                 Success('Order Confirmed!');
                 location.href = "shop.php";

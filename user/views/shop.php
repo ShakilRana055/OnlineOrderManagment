@@ -119,10 +119,10 @@ session_start();
                                                         data-setbg="../../'.$displayPicture.'">
                                                         <div class="product__discount__percent">-'.$discountPrice.'%</div>
                                                         <ul class="product__item__pic__hover">
-                                                            <li><a href="shop-detail.php?foodItemId='.$foodItemId.'"><i class="fa fa-info-circle"></i></a></li>
-                                                            <li><a href="../controller/CustomerController.php?favorites='.$foodItemId.'"><i class="fa fa-heart"></i></a></li>
-                                                            <li><a href="../controller/CustomerController.php?removeCart='.$foodItemId.'"><i class="fa fa-retweet"></i></a></li>
-                                                            <li><a href="../controller/CustomerController.php?foodItemId='.$foodItemId.'&&quantity=1"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="shop-detail.php?foodItemId='.$foodItemId.'"title = "Information"><i class="fa fa-info-circle"></i></a></li>
+                                                            <li><a href="../controller/CustomerController.php?favorites='.$foodItemId.'"title = "Add to Favorite"><i class="fa fa-heart"></i></a></li>
+                                                            <li><a href="../controller/CustomerController.php?removeCart='.$foodItemId.'"  title = "Remove from Cart"><i class="fa fa-retweet"></i></a></li>
+                                                            <li><a href="../controller/CustomerController.php?foodItemId='.$foodItemId.'&&quantity=1"  title = "Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="product__discount__item__text">

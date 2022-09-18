@@ -74,7 +74,7 @@
         }
     }
 
-    if($_POST['confirmOrder'] && $customerId > 0 ){
+    if(isset($_POST['confirmOrder']) && $customerId > 0 ){
         $phone = $_POST['phone']; $address = $_POST['address'];
         $deliveryDate = $_POST['deliveryDate']; $invoiceDetail = $_POST['invoiceDetail'];
         $subTotal = $_POST['subTotal']; $grandTotal = $_POST['grandTotal'];
@@ -87,7 +87,6 @@
         
         $sql = "INSERT INTO invoice (`InvoiceNumber`, `CustomerId`, `Phone`, `Address`, `DeliveryDate`,`SubTotal`, `GrandTotal`, `DeliveryCharge`, `Status`, `Remarks`, `CreatedBy`, OrderDate)
                 VALUES('$invoiceNumber', '$customerId', '$phone', '$address', '$deliveryDate', '$subTotal', '$grandTotal', '60', 'Pending', 'Initialy Order Place', '$customerId', '$currentDate')";
-        
         $result = mysqli_query($con, $sql);
         $invoiceId = mysqli_insert_id($con);
         if($result != null){

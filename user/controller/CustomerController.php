@@ -25,7 +25,7 @@
         {
             $sqlQuery = "INSERT INTO `shoppingcart`(`UserId`, `FoodItemId`, `Quantity`, `CreatedBy`) 
             VALUES ('$customerId','$foodItemId','$quantity','$customerId')";
-
+            echo $sqlQuery;
             $result = mysqli_query($con, $sqlQuery);
             if($result != null){
                 $_SESSION['CartAdded'] = 'success';

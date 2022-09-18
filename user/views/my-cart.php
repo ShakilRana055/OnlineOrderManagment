@@ -47,7 +47,10 @@ session_start();
                                 $deliverDate = $row['DeliveryDate'];
                                 $status = $row['Status'];
                                 $id = $row['Id'];
-                                //
+                                $button = '<button invoiceId = '.$id.' class = "information btn btn-sm btn-primary">Info</button>';
+                                if($status == "Pending"){
+                                    $button .= '<button invoiceId = '.$id.' class = "delete btn btn-sm btn-danger">Delete</button>';
+                                }
                                 echo '<tr>
                                     <td>'.$sl.'</td>
                                     <td>'.$invoiceNumber.'</td>
@@ -56,9 +59,7 @@ session_start();
                                     <td>'.$orderDate.'</td>
                                     <td>'.$deliverDate.'</td>
                                     <td>'.$status.'</td>
-                                    <td>
-                                        <button invoiceId = '.$id.' class = "information btn btn-sm btn-primary">Info</button>
-                                     </td>
+                                    <td>'.$button.'</td>
                                 </tr>';
                                 $sl++;
                             }

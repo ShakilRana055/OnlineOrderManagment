@@ -24,6 +24,7 @@
             exit;
         }else{
             $_SESSION['loginErrorMsg']="Your Email or Password is not valid!";
+            header('Location: ../views/CustomerLogin.php');
         }
     }
 

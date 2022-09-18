@@ -2,8 +2,8 @@
 session_start();
     $topBanner = true;
     $shopPage = true;
-    $title = 'Online Food Service - Shoping- Cart';
-    $pageName = 'Shoping Cart';
+    $title = 'Online Food Service - Shopping- Cart';
+    $pageName = 'Shopping Cart';
     include('layout/topbar.php');
 ?>
 
