@@ -86,14 +86,14 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-4 col-md-4">
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i> test@gmail.com</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-4 col-md-4">
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
                             <?php if(isset($_SESSION['customer']))
@@ -102,6 +102,16 @@ if(isset($_SESSION['customer'])) $customerId = $_SESSION['customer']['Id'];
                                 <?php }
                                 else {?>
                                     <a href="CustomerLogin.php"><i class="fa fa-user"></i> Login</a>
+                                <?php }?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="header__top__right">
+                            <div class="header__top__right__auth">
+                            <?php if(isset($_SESSION['customer']) == false)
+                                {?> 
+                                    <a href="CustomerRegistration.php"><i class="fa fa-user"></i> Registration</a>
                                 <?php }?>
                             </div>
                         </div>
